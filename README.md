@@ -41,7 +41,7 @@
   <p align="center"> <div align="center">
     <a href="https://www.photoshop.com/en" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg" alt="photoshop" width="40" height="40"/> </a> 
     <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank"> <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator" width="40" height="40"/> </a> 
-    <a href="https://www.adobe.com/products/xd.html" target="_blank"> <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd.svg" alt="xd" width="40" height="40"/> </a>
+<!--     <a href="https://www.adobe.com/products/xd.html" target="_blank"> <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd.svg" alt="xd" width="40" height="40"/> </a> -->
   <a href="https://www.figma.com/" target="_blank"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a>
   <a href="https://www.blender.org/" target="_blank"><img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender" width="40" height="40"/> </a>
   </p><br>
@@ -50,7 +50,7 @@
  <p><div align="center"><a href="https://www.buymeacoffee.com/ruchiizzz"> <img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="205" alt="ruchiizzz" /></a></p><br>
 
 <h3 align="center">My Stats:</h3>
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ruchiraedirisinghe&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&layout=compact"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ruchira-edirisinghe&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&layout=compact"/>
 </div><br>
 
 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
@@ -58,15 +58,15 @@
 
  
 <div align="center">
-  <p align="centre"> <a href="https://github.com/ryo-ma/github-profile-trophy"><br><img src="https://github-profile-trophy.vercel.app/?username=ruchiraedirisinghe&theme=tokyonight&margin-h=15&margin-w=5&no-bg=true" alt="ruchiraedirisinghe" /></a> </p>
+  <p align="centre"> <a href="https://github.com/ryo-ma/github-profile-trophy"><br><img src="https://github-profile-trophy.vercel.app/?username=ruchira-edirisinghe&theme=tokyonight&margin-h=15&margin-w=5&no-bg=true" alt="ruchira-edirisinghe" /></a> </p>
 </div>
 <br>
 <div align="center">
-<p align="centre">&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=ruchiraedirisinghe&show_icons=true&theme=tokyonight" alt="ruchiraedirisinghe" /></p>
+<p align="centre">&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=ruchira-edirisinghe&show_icons=true&theme=tokyonight" alt="ruchira-edirisinghe" /></p>
 </div>
 <br>
 <div align="center">
-<p align="centre"><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=ruchiraedirisinghe&show_icons=true&theme=tokyonight" alt="ruchiraedirisinghe" /></p>
+<p align="centre"><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=ruchira-edirisinghe&show_icons=true&theme=tokyonight" alt="ruchira-edirisinghe" /></p>
 </div>
 <br>
 <!-- [![An image of @ruchiraedirisinghe's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/ruchiraedirisinghe)](https://holopin.io/@ruchiraedirisinghe)] -->
