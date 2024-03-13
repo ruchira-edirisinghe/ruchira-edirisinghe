@@ -69,4 +69,4 @@
 <p align="centre"><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=ruchiraedirisinghe&show_icons=true&theme=tokyonight" alt="ruchiraedirisinghe" /></p>
 </div>
 <br>
-[![An image of @ruchiraedirisinghe's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/ruchiraedirisinghe)](https://holopin.io/@ruchiraedirisinghe)
+[![An image of @ruchiraedirisinghe's Holopin badges, which is a link to view their full Holopin profile](https://holopin.me/ruchiraedirisinghe)](https://holopin.io/@ruchiraedirisinghe)]
