@@ -61,11 +61,19 @@ def card(kind, color, value, label):
 </svg>'''
 
 
+def safe(fn):
+    try:
+        return fn()
+    except Exception as e:  # one flaky source shouldn't block the other cards
+        print(f'::warning::{fn.__name__} failed: {e}')
+        return None
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     user = github_user()
     cards = {
-        'views': ('#00b4d8', fmt(profile_views()), 'Profile views'),
+        'views': ('#00b4d8', fmt(safe(profile_views)), 'Profile views'),
         'followers': ('#a78bfa', fmt(user.get('followers')), 'Followers'),
         'repos': ('#ff5fd2', fmt(user.get('public_repos')), 'Public repos'),
     }

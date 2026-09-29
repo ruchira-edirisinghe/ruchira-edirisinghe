@@ -17,7 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      - name: Generate stat cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/stat_cards.py "${{ github.repository_owner }}" dist
 
       - name: Generate snake SVGs
         uses: Platane/snk@v3
@@ -26,11 +31,6 @@ jobs:
           outputs: |
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark&color_snake=#00B4D8&color_dots=#161b22,#0e4a5c,#00708a,#0096b8,#00B4D8
-
-      - name: Generate stat cards
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 .github/scripts/stat_cards.py "${{ github.repository_owner }}" dist
 
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
