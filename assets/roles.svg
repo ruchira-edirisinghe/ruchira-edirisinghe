@@ -6,9 +6,6 @@
     <style>
       .sans { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; }
       .mono { font-family: 'JetBrains Mono', Consolas, Menlo, 'Courier New', monospace; }
-      .border { stroke-dasharray: 60 1040; animation: run 6s linear infinite; }
-      .b2 { animation-delay: -2s; } .b3 { animation-delay: -4s; }
-      @keyframes run { to { stroke-dashoffset: -1100; } }
       .bob { animation: bob 3.5s ease-in-out infinite; }
       .bob2 { animation-delay: -1.2s; } .bob3 { animation-delay: -2.4s; }
       @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
@@ -32,7 +29,6 @@
   <!-- Card 1: UI/UX -->
   <g transform="translate(4 4)">
     <rect width="384" height="292" rx="20" fill="url(#c1)" stroke="#00b4d8" stroke-opacity="0.35"/>
-    <rect class="border" width="384" height="292" rx="20" fill="none" stroke="#7df9ff" stroke-width="2.5" stroke-linecap="round"/>
     <g class="bob" transform="translate(0 0)">
       <g transform="translate(32 30)">
         <rect width="150" height="104" rx="10" fill="#0f1b2d" stroke="#00b4d8" stroke-opacity="0.6"/>
@@ -51,13 +47,12 @@
     <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#e6f7ff">UI/UX Engineer</text>
     <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Research → wireframes → polished,</text>
     <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">accessible interfaces in real code.</text>
-    <text x="32" y="274" class="mono" font-size="12" fill="#7df9ff">Figma · Adobe · React · Tailwind</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#7df9ff">Figma · Framer · React · Tailwind</text>
   </g>
 
   <!-- Card 2: Game Dev -->
   <g transform="translate(408 4)">
     <rect width="384" height="292" rx="20" fill="url(#c2)" stroke="#a78bfa" stroke-opacity="0.35"/>
-    <rect class="border b2" width="384" height="292" rx="20" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-linecap="round"/>
     <g transform="translate(32 30)">
       <!-- platform level -->
       <rect x="0" y="92" width="200" height="12" fill="#6d5fc7"/>
@@ -90,13 +85,12 @@
     <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#efeaff">Game Developer</text>
     <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Mechanics, levels and 3D worlds</text>
     <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">that feel great to play.</text>
-    <text x="32" y="274" class="mono" font-size="12" fill="#c4b5fd">Unity · C# · Blender · Game Design</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#c4b5fd">Unity · C# · Blender · AR/VR</text>
   </g>
 
   <!-- Card 3: Vibe Coding -->
   <g transform="translate(812 4)">
     <rect width="384" height="292" rx="20" fill="url(#c3)" stroke="#ff5fd2" stroke-opacity="0.35"/>
-    <rect class="border b3" width="384" height="292" rx="20" fill="none" stroke="#ff9be6" stroke-width="2.5" stroke-linecap="round"/>
     <g transform="translate(32 30)"><g class="bob bob3">
       <rect width="230" height="104" rx="10" fill="#140a1c" stroke="#ff5fd2" stroke-opacity="0.6"/>
       <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="27" cy="13" r="4" fill="#febc2e"/><circle cx="40" cy="13" r="4" fill="#28c840"/>
@@ -111,6 +105,6 @@
     <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#ffeefb">Vibe Coder</text>
     <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Pairing with AI to go from idea</text>
     <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">to working prototype, fast.</text>
-    <text x="32" y="274" class="mono" font-size="12" fill="#ff9be6">Prompt · Iterate · Ship · Repeat</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#ff9be6">Claude · Cursor · ChatGPT · Copilot</text>
   </g>
 </svg>
