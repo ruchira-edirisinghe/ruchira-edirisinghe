@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="Ruchira Edirisinghe — UI/UX Engineer, Game Developer, Vibe Coder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070b14"/>
+      <stop offset="0.55" stop-color="#0b1a2e"/>
+      <stop offset="1" stop-color="#101a3a"/>
+    </linearGradient>
+    <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7df9ff"/>
+      <stop offset="0.5" stop-color="#00b4d8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff5fd2"/>
+      <stop offset="0.6" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#00b4d8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101a3a" stop-opacity="1"/>
+      <stop offset="0.35" stop-color="#101a3a" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00b4d8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#00b4d8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="1200" height="420" rx="24"/></clipPath>
+    <clipPath id="floorClip"><rect x="0" y="300" width="1200" height="120"/></clipPath>
+    <mask id="sunMask">
+      <rect x="0" y="0" width="1200" height="420" fill="#fff"/>
+      <rect x="440" y="226" width="320" height="5" fill="#000"/>
+      <rect x="440" y="244" width="320" height="7" fill="#000"/>
+      <rect x="440" y="264" width="320" height="9" fill="#000"/>
+      <rect x="440" y="284" width="320" height="12" fill="#000"/>
+    </mask>
+    <style>
+      .sans { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', Consolas, Menlo, 'Courier New', monospace; }
+      .twinkle { animation: twinkle 3s ease-in-out infinite; }
+      .t2 { animation-delay: .8s; } .t3 { animation-delay: 1.6s; } .t4 { animation-delay: 2.3s; }
+      @keyframes twinkle { 0%,100% { opacity: .15 } 50% { opacity: 1 } }
+      .floatA { animation: floatA 6s ease-in-out infinite; }
+      .floatB { animation: floatB 7s ease-in-out infinite; }
+      .floatC { animation: floatA 5s ease-in-out infinite; animation-delay: 1.2s; }
+      @keyframes floatA { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+      @keyframes floatB { 0%,100% { transform: translateY(-8px) rotate(-4deg) } 50% { transform: translateY(8px) rotate(4deg) } }
+      .spin { transform-box: fill-box; transform-origin: center; animation: spin 8s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg) } }
+      .grid { animation: grid 1.6s linear infinite; }
+      @keyframes grid { from { transform: translateY(0) } to { transform: translateY(24px) } }
+      .cursor { animation: cursor 9s ease-in-out infinite; }
+      @keyframes cursor {
+        0%,100% { transform: translate(0,0) } 25% { transform: translate(-40px,8px) }
+        50% { transform: translate(10px,18px) } 75% { transform: translate(34px,-6px) }
+      }
+      .fadeIn { animation: fadeIn 1.2s ease-out both; }
+      .d1 { animation-delay: .3s } .d2 { animation-delay: .6s } .d3 { animation-delay: .9s }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: translateY(0) } }
+      .blink { animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0 } }
+      .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 1.4s ease-in-out infinite; }
+      @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.18) } }
+    </style>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="420" fill="url(#sky)"/>
+
+    <!-- stars -->
+    <g fill="#cfefff">
+      <circle class="twinkle" cx="80" cy="50" r="1.6"/>
+      <circle class="twinkle t2" cx="210" cy="110" r="1.2"/>
+      <circle class="twinkle t3" cx="330" cy="36" r="1.8"/>
+      <circle class="twinkle t4" cx="520" cy="70" r="1.1"/>
+      <circle class="twinkle" cx="690" cy="30" r="1.5"/>
+      <circle class="twinkle t3" cx="820" cy="96" r="1.2"/>
+      <circle class="twinkle t2" cx="960" cy="44" r="1.7"/>
+      <circle class="twinkle t4" cx="1110" cy="120" r="1.3"/>
+      <circle class="twinkle t2" cx="1150" cy="40" r="1"/>
+      <circle class="twinkle t3" cx="40" cy="180" r="1.1"/>
+      <circle class="twinkle" cx="400" cy="150" r="1"/>
+      <circle class="twinkle t4" cx="760" cy="160" r="1"/>
+    </g>
+
+    <!-- retro sun -->
+    <circle cx="600" cy="250" r="150" fill="url(#glow)"/>
+    <circle cx="600" cy="262" r="112" fill="url(#sun)" mask="url(#sunMask)" opacity="0.55"/>
+
+    <!-- perspective grid floor -->
+    <rect x="0" y="300" width="1200" height="120" fill="#0a1024"/>
+    <g clip-path="url(#floorClip)" stroke="#00b4d8" stroke-opacity="0.45" stroke-width="1.2">
+      <g class="grid">
+        <line x1="0" y1="282" x2="1200" y2="282"/><line x1="0" y1="306" x2="1200" y2="306"/>
+        <line x1="0" y1="330" x2="1200" y2="330"/><line x1="0" y1="354" x2="1200" y2="354"/>
+        <line x1="0" y1="378" x2="1200" y2="378"/><line x1="0" y1="402" x2="1200" y2="402"/>
+      </g>
+      <g stroke-opacity="0.6">
+        <line x1="600" y1="300" x2="600" y2="420"/>
+        <line x1="600" y1="300" x2="480" y2="420"/><line x1="600" y1="300" x2="720" y2="420"/>
+        <line x1="600" y1="300" x2="340" y2="420"/><line x1="600" y1="300" x2="860" y2="420"/>
+        <line x1="600" y1="300" x2="180" y2="420"/><line x1="600" y1="300" x2="1020" y2="420"/>
+        <line x1="600" y1="300" x2="0" y2="420"/><line x1="600" y1="300" x2="1200" y2="420"/>
+        <line x1="600" y1="300" x2="-220" y2="420"/><line x1="600" y1="300" x2="1420" y2="420"/>
+      </g>
+    </g>
+    <rect x="0" y="300" width="1200" height="120" fill="url(#floorFade)"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="#7df9ff" stroke-opacity="0.8" stroke-width="1.5"/>
+
+    <!-- floating UI window (left) -->
+    <g transform="translate(70 150)">
+      <g class="floatA">
+        <rect width="200" height="138" rx="12" fill="#0f1b2d" stroke="#00b4d8" stroke-opacity="0.7"/>
+        <rect width="200" height="26" rx="12" fill="#13243b"/>
+        <rect y="14" width="200" height="12" fill="#13243b"/>
+        <circle cx="16" cy="13" r="4" fill="#ff5f57"/><circle cx="30" cy="13" r="4" fill="#febc2e"/><circle cx="44" cy="13" r="4" fill="#28c840"/>
+        <rect x="14" y="38" width="76" height="56" rx="6" fill="#1b3350"/>
+        <path d="M22 86 L42 64 L56 78 L66 70 L84 86 Z" fill="#00b4d8" opacity="0.8"/>
+        <circle cx="74" cy="52" r="6" fill="#7df9ff" opacity="0.9"/>
+        <rect x="102" y="40" width="84" height="8" rx="4" fill="#3b5a80"/>
+        <rect x="102" y="56" width="64" height="8" rx="4" fill="#2a4566"/>
+        <rect x="102" y="72" width="74" height="8" rx="4" fill="#2a4566"/>
+        <rect x="14" y="106" width="80" height="20" rx="10" fill="#00b4d8"/>
+        <rect x="104" y="106" width="80" height="20" rx="10" fill="none" stroke="#3b5a80"/>
+      </g>
+    </g>
+
+    <!-- floating controller (right) -->
+    <g transform="translate(930 150)">
+      <g class="floatB" style="transform-box: fill-box; transform-origin: center;">
+        <path d="M40 10 H160 C200 10 214 50 218 90 C222 126 200 142 182 128 L154 102 H46 L18 128 C0 142 -22 126 -18 90 C-14 50 0 10 40 10 Z" fill="#1a1440" stroke="#a78bfa" stroke-width="2"/>
+        <rect x="38" y="46" width="14" height="42" rx="3" fill="#a78bfa"/>
+        <rect x="24" y="60" width="42" height="14" rx="3" fill="#a78bfa"/>
+        <circle cx="156" cy="50" r="8" fill="#00b4d8"/>
+        <circle cx="176" cy="68" r="8" fill="#ff5fd2"/>
+        <circle cx="136" cy="68" r="8" fill="#28c840"/>
+        <circle cx="156" cy="86" r="8" fill="#febc2e"/>
+        <rect x="86" y="44" width="12" height="6" rx="3" fill="#6d5fc7"/>
+        <rect x="104" y="44" width="12" height="6" rx="3" fill="#6d5fc7"/>
+      </g>
+    </g>
+
+    <!-- pixel heart (top-left) -->
+    <g transform="translate(300 64)">
+      <g class="pulse" fill="#ff5fd2">
+        <rect x="6" y="0" width="6" height="6"/><rect x="12" y="0" width="6" height="6"/>
+        <rect x="24" y="0" width="6" height="6"/><rect x="30" y="0" width="6" height="6"/>
+        <rect x="0" y="6" width="42" height="6"/><rect x="0" y="12" width="42" height="6"/>
+        <rect x="6" y="18" width="30" height="6"/><rect x="12" y="24" width="18" height="6"/>
+        <rect x="18" y="30" width="6" height="6"/>
+      </g>
+    </g>
+
+    <!-- code tag + sparkle (top-right) -->
+    <g transform="translate(830 58)">
+      <g class="floatC">
+        <rect width="104" height="40" rx="20" fill="#0f1b2d" stroke="#00b4d8" stroke-opacity="0.6"/>
+        <text x="52" y="27" text-anchor="middle" class="mono" font-size="18" font-weight="700" fill="#7df9ff">&lt;/&gt;</text>
+      </g>
+    </g>
+    <g transform="translate(978 60)">
+      <path class="spin" d="M16 0 L20 12 L32 16 L20 20 L16 32 L12 20 L0 16 L12 12 Z" fill="#febc2e"/>
+    </g>
+    <g transform="translate(236 290)">
+      <path class="spin" d="M10 0 L12.5 7.5 L20 10 L12.5 12.5 L10 20 L7.5 12.5 L0 10 L7.5 7.5 Z" fill="#7df9ff" style="animation-duration: 5s"/>
+    </g>
+
+    <!-- name + roles -->
+    <g class="sans" text-anchor="middle">
+      <text class="mono" x="600" y="118" font-size="16" fill="#7df9ff" letter-spacing="4">&gt; HELLO WORLD, I'M</text>
+      <text  x="600" y="182" font-size="62" font-weight="800" fill="url(#name)" letter-spacing="1">Ruchira Edirisinghe</text>
+    </g>
+    <g class="sans" font-size="16" font-weight="600" text-anchor="middle">
+      <rect x="370" y="208" width="150" height="36" rx="18" fill="#0b2536" stroke="#00b4d8"/>
+      <text x="445" y="231" fill="#7df9ff">UI/UX Engineer</text>
+      <rect x="532" y="208" width="152" height="36" rx="18" fill="#1a1440" stroke="#a78bfa"/>
+      <text x="608" y="231" fill="#c4b5fd">Game Developer</text>
+      <rect x="696" y="208" width="134" height="36" rx="18" fill="#2a1030" stroke="#ff5fd2"/>
+      <text x="763" y="231" fill="#ff9be6">Vibe Coder</text>
+    </g>
+    <rect x="338" y="258" width="524" height="28" rx="14" fill="#070b14" fill-opacity="0.8"/>
+    <text class="mono" x="600" y="276" font-size="14" fill="#8b949e" text-anchor="middle">designing interfaces · building games · shipping ideas with AI<tspan class="blink" fill="#7df9ff"> ▌</tspan></text>
+
+    <!-- design cursor with name tag -->
+    <g transform="translate(870 300)">
+      <g class="cursor">
+        <path d="M0 0 L0 22 L6 16 L11 27 L15 25 L10 14 L18 14 Z" fill="#ff5fd2" stroke="#fff" stroke-width="1.2"/>
+        <rect x="16" y="22" width="58" height="20" rx="6" fill="#ff5fd2"/>
+        <text x="45" y="36" text-anchor="middle" class="sans" font-size="11" font-weight="700" fill="#fff">Ruchira</text>
+      </g>
+    </g>
+  </g>
+  <rect x="0.75" y="0.75" width="1198.5" height="418.5" rx="23.5" fill="none" stroke="#00b4d8" stroke-opacity="0.35" stroke-width="1.5"/>
+</svg>

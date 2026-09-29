@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="What I do: UI/UX Engineering, Game Development, Vibe Coding">
+  <defs>
+    <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b2536"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+    <linearGradient id="c2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1440"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+    <linearGradient id="c3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1030"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+    <style>
+      .sans { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; }
+      .mono { font-family: 'JetBrains Mono', Consolas, Menlo, 'Courier New', monospace; }
+      .border { stroke-dasharray: 60 1040; animation: run 6s linear infinite; }
+      .b2 { animation-delay: -2s; } .b3 { animation-delay: -4s; }
+      @keyframes run { to { stroke-dashoffset: -1100; } }
+      .bob { animation: bob 3.5s ease-in-out infinite; }
+      .bob2 { animation-delay: -1.2s; } .bob3 { animation-delay: -2.4s; }
+      @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+      .drag { animation: drag 4s ease-in-out infinite; }
+      @keyframes drag { 0%,100% { transform: translate(0,0) } 50% { transform: translate(26px,10px) } }
+      .jump { animation: jump 1.6s ease-in-out infinite; }
+      @keyframes jump { 0%,100% { transform: translateY(0) } 40% { transform: translateY(-22px) } 60% { transform: translateY(-22px) } }
+      .coin { transform-box: fill-box; transform-origin: center; animation: coin 1.2s linear infinite; }
+      @keyframes coin { 0%,100% { transform: scaleX(1) } 50% { transform: scaleX(.15) } }
+      .type1 { animation: type 5s steps(1) infinite; }
+      .type2 { animation: type2 5s steps(1) infinite; }
+      .type3 { animation: type3 5s steps(1) infinite; }
+      @keyframes type  { 0% { opacity: 1 } }
+      @keyframes type2 { 0%,19% { opacity: .15 } 20%,100% { opacity: 1 } }
+      @keyframes type3 { 0%,44% { opacity: .15 } 45%,100% { opacity: 1 } }
+      .spark { transform-box: fill-box; transform-origin: center; animation: spark 2s ease-in-out infinite; }
+      @keyframes spark { 0%,100% { transform: scale(.7) rotate(0) } 50% { transform: scale(1.1) rotate(45deg) } }
+    </style>
+  </defs>
+
+  <!-- Card 1: UI/UX -->
+  <g transform="translate(4 4)">
+    <rect width="384" height="292" rx="20" fill="url(#c1)" stroke="#00b4d8" stroke-opacity="0.35"/>
+    <rect class="border" width="384" height="292" rx="20" fill="none" stroke="#7df9ff" stroke-width="2.5" stroke-linecap="round"/>
+    <g class="bob" transform="translate(0 0)">
+      <g transform="translate(32 30)">
+        <rect width="150" height="104" rx="10" fill="#0f1b2d" stroke="#00b4d8" stroke-opacity="0.6"/>
+        <rect x="12" y="12" width="126" height="10" rx="5" fill="#1b3350"/>
+        <rect x="12" y="32" width="58" height="58" rx="8" fill="#1b3350"/>
+        <rect x="80" y="32" width="58" height="26" rx="8" fill="#00b4d8" opacity="0.85"/>
+        <rect x="80" y="64" width="58" height="26" rx="8" fill="#1b3350"/>
+      </g>
+      <g class="drag" transform="translate(0 0)">
+        <g transform="translate(150 96)">
+          <rect x="-6" y="-6" width="52" height="30" rx="6" fill="none" stroke="#7df9ff" stroke-dasharray="4 3"/>
+          <path d="M40 16 L40 36 L45 31 L50 41 L54 39 L49 29 L56 29 Z" fill="#7df9ff" stroke="#0d1117"/>
+        </g>
+      </g>
+    </g>
+    <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#e6f7ff">UI/UX Engineer</text>
+    <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Research → wireframes → polished,</text>
+    <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">accessible interfaces in real code.</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#7df9ff">Figma · Adobe · React · Tailwind</text>
+  </g>
+
+  <!-- Card 2: Game Dev -->
+  <g transform="translate(408 4)">
+    <rect width="384" height="292" rx="20" fill="url(#c2)" stroke="#a78bfa" stroke-opacity="0.35"/>
+    <rect class="border b2" width="384" height="292" rx="20" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-linecap="round"/>
+    <g transform="translate(32 30)">
+      <!-- platform level -->
+      <rect x="0" y="92" width="200" height="12" fill="#6d5fc7"/>
+      <rect x="0" y="104" width="200" height="8" fill="#3b2f80"/>
+      <rect x="130" y="56" width="50" height="10" fill="#6d5fc7"/>
+      <!-- coins -->
+      <g fill="#febc2e">
+        <rect class="coin" x="146" y="34" width="12" height="14" rx="3"/>
+        <rect class="coin" x="80" y="40" width="12" height="14" rx="3" style="animation-delay:-.4s"/>
+      </g>
+      <!-- pixel hero -->
+      <g class="jump">
+        <g transform="translate(30 56)">
+          <rect x="6" y="0" width="18" height="6" fill="#ff5fd2"/>
+          <rect x="0" y="6" width="30" height="6" fill="#ff5fd2"/>
+          <rect x="6" y="12" width="18" height="10" fill="#ffd8b0"/>
+          <rect x="18" y="14" width="4" height="4" fill="#0d1117"/>
+          <rect x="3" y="22" width="24" height="8" fill="#00b4d8"/>
+          <rect x="6" y="30" width="6" height="6" fill="#3b2f80"/>
+          <rect x="18" y="30" width="6" height="6" fill="#3b2f80"/>
+        </g>
+      </g>
+      <!-- enemy -->
+      <g transform="translate(96 76)"><g class="bob bob2">
+        <path d="M0 16 C0 4 8 0 12 0 C16 0 24 4 24 16 Z" fill="#28c840"/>
+        <rect x="6" y="6" width="4" height="4" fill="#0d1117"/><rect x="14" y="6" width="4" height="4" fill="#0d1117"/>
+      </g></g>
+      <text x="250" y="20" class="mono" font-size="12" fill="#c4b5fd" text-anchor="end">SCORE 1UP</text>
+    </g>
+    <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#efeaff">Game Developer</text>
+    <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Mechanics, levels and 3D worlds</text>
+    <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">that feel great to play.</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#c4b5fd">Unity · C# · Blender · Game Design</text>
+  </g>
+
+  <!-- Card 3: Vibe Coding -->
+  <g transform="translate(812 4)">
+    <rect width="384" height="292" rx="20" fill="url(#c3)" stroke="#ff5fd2" stroke-opacity="0.35"/>
+    <rect class="border b3" width="384" height="292" rx="20" fill="none" stroke="#ff9be6" stroke-width="2.5" stroke-linecap="round"/>
+    <g transform="translate(32 30)"><g class="bob bob3">
+      <rect width="230" height="104" rx="10" fill="#140a1c" stroke="#ff5fd2" stroke-opacity="0.6"/>
+      <circle cx="14" cy="13" r="4" fill="#ff5f57"/><circle cx="27" cy="13" r="4" fill="#febc2e"/><circle cx="40" cy="13" r="4" fill="#28c840"/>
+      <g class="mono" font-size="12">
+        <text class="type1" x="14" y="44" fill="#ff9be6">› <tspan fill="#e6e6e6">make it feel magical</tspan></text>
+        <text class="type2" x="14" y="66" fill="#8b949e">  ✓ generated components</text>
+        <text class="type3" x="14" y="88" fill="#28c840">  ✓ shipped to prod ✨</text>
+      </g>
+    </g></g>
+    <g transform="translate(290 36)"><path class="spark" d="M16 0 L20 12 L32 16 L20 20 L16 32 L12 20 L0 16 L12 12 Z" fill="#febc2e"/></g>
+    <g transform="translate(318 96)"><path class="spark" d="M8 0 L10 6 L16 8 L10 10 L8 16 L6 10 L0 8 L6 6 Z" fill="#ff9be6" style="animation-delay:-1s"/></g>
+    <text x="32" y="190" class="sans" font-size="26" font-weight="800" fill="#ffeefb">Vibe Coder</text>
+    <text x="32" y="222" class="sans" font-size="15" fill="#8b949e">Pairing with AI to go from idea</text>
+    <text x="32" y="244" class="sans" font-size="15" fill="#8b949e">to working prototype, fast.</text>
+    <text x="32" y="274" class="mono" font-size="12" fill="#ff9be6">Prompt · Iterate · Ship · Repeat</text>
+  </g>
+</svg>
