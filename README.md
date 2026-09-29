@@ -16,12 +16,12 @@
 <a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-repos.svg" height="50" alt="Public repos" /></a> -->
 <!-- invisible counter that records profile views; the stat cards above read its total -->
 <img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&style=pixel" alt="" />
-
+<br>
 <img src="assets/divider.svg" width="100%" alt="" />
 
 <!-- ═════════════════════════════ WHAT I DO ═════════════════════════════ -->
 <img src="assets/roles.svg" width="100%" alt="UI/UX Engineer · Game Developer · Vibe Coder" />
-
+<br>
 <p>
 💼 UI/UX Engineer &amp; Game Developer at <b>Funextreme Technology LLC</b><br/>
 🎓 Graduate of <b>BSc (Hons) Computer Security</b>, University of Plymouth (UK)<br/>
