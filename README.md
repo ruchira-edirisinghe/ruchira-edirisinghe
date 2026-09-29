@@ -11,9 +11,9 @@
 <a href="https://www.instagram.com/ruchii_zzz/"><img src="assets/btn-instagram.svg" height="50" alt="Instagram — life & visuals" /></a>
 <a href="mailto:ruchiraedirisinghe0@gmail.com"><img src="assets/btn-email.svg" height="50" alt="Email — say hello" /></a>
 
-<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-views.svg" height="50" alt="Profile views" />
+<!-- <img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-views.svg" height="50" alt="Profile views" />
 <a href="https://github.com/ruchira-edirisinghe?tab=followers"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-followers.svg" height="50" alt="Followers" /></a>
-<a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-repos.svg" height="50" alt="Public repos" /></a>
+<a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-repos.svg" height="50" alt="Public repos" /></a> -->
 <!-- invisible counter that records profile views; the stat cards above read its total -->
 <img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&style=pixel" alt="" />
 
