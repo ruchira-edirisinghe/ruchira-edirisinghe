@@ -1,6 +1,6 @@
-<!-- ═════════════════════════════ HERO ═════════════════════════════ -->
 <div align="center">
 
+<!-- ═════════════════════════════ HERO ═════════════════════════════ -->
 <img src="assets/hero.svg" width="100%" alt="Ruchira Edirisinghe — UI/UX Engineer, Game Developer, Vibe Coder" />
 
 <br/><br/>
@@ -11,48 +11,38 @@
 <a href="https://www.instagram.com/ruchii_zzz/"><img src="assets/btn-instagram.svg" height="50" alt="Instagram — life & visuals" /></a>
 <a href="mailto:ruchiraedirisinghe0@gmail.com"><img src="assets/btn-email.svg" height="50" alt="Email — say hello" /></a>
 
-<br/>
-
-<img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&label=PROFILE%20VIEWS&color=00B4D8&style=flat-square" alt="Profile views" />
-<a href="https://github.com/ruchira-edirisinghe?tab=followers"><img src="https://img.shields.io/github/followers/ruchira-edirisinghe?label=FOLLOWERS&style=flat-square&color=A78BFA&labelColor=0D1117" alt="Followers" /></a>
-<a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Fusers%2Fruchira-edirisinghe&query=%24.public_repos&label=REPOS&style=flat-square&color=FF5FD2&labelColor=0D1117" alt="Public repos" /></a>
-
-</div>
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-views.svg" height="50" alt="Profile views" />
+<a href="https://github.com/ruchira-edirisinghe?tab=followers"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-followers.svg" height="50" alt="Followers" /></a>
+<a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-repos.svg" height="50" alt="Public repos" /></a>
+<!-- invisible counter that records profile views; the stat cards above read its total -->
+<img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&style=pixel" alt="" />
 
 <img src="assets/divider.svg" width="100%" alt="" />
 
 <!-- ═════════════════════════════ WHAT I DO ═════════════════════════════ -->
-## 🕹️ What I Do
-
 <img src="assets/roles.svg" width="100%" alt="UI/UX Engineer · Game Developer · Vibe Coder" />
 
-- 💼 Currently building at **FUNXT LLC**
-- 🌱 Exploring game design, motion, 3D and AI-powered workflows
-- 🎓 BSc (Hons) Computer Security, University of Plymouth (UK)
+<p>
+💼 UI/UX Engineer &amp; Game Developer at <b>Funextreme Technology LLC</b><br/>
+🎓 Graduate of <b>BSc (Hons) Computer Security</b>, University of Plymouth (UK)<br/>
+🌱 Exploring game design, motion, 3D and AI-powered workflows
+</p>
 
 <img src="assets/divider.svg" width="100%" alt="" />
 
 <!-- ═════════════════════════════ STACK ═════════════════════════════ -->
-## 🛠️ Tech Stack
-
 <img src="assets/stack.svg" width="100%" alt="Tech stack — Design & 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender · Code & Games: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python, Unity, C# · AI & Workflow: Claude, ChatGPT, Gemini, Cursor, Copilot, Midjourney, Git, GitHub, Vercel" />
 
 <img src="assets/divider.svg" width="100%" alt="" />
 
 <!-- ═════════════════════════════ STATS ═════════════════════════════ -->
-## 📊 GitHub Ecosystem
-
-<div align="center">
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ruchira-edirisinghe&theme=github_dark" width="66%" alt="Profile details and contribution graph" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ruchira-edirisinghe&theme=github_dark" width="73%" alt="Profile details and contribution graph" />
 <br/>
-<img src="https://github-stats-extended.vercel.app/api?username=ruchira-edirisinghe&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&rank_icon=github&disable_animations=true&bg_color=0D1117&title_color=7DF9FF&text_color=C9D1D9&icon_color=A78BFA&ring_color=00B4D8" height="140" alt="GitHub stats" />
-<img src="https://github-stats-extended.vercel.app/api/top-langs?username=ruchira-edirisinghe&disable_animations=true&layout=compact&langs_count=6&hide_border=true&bg_color=0D1117&title_color=7DF9FF&text_color=C9D1D9" height="140" alt="Top languages" />
+<img src="https://github-stats-extended.vercel.app/api?username=ruchira-edirisinghe&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&rank_icon=github&disable_animations=true&bg_color=0D1117&title_color=7DF9FF&text_color=C9D1D9&icon_color=A78BFA&ring_color=00B4D8" height="154" alt="GitHub stats" />
+<img src="https://github-stats-extended.vercel.app/api/top-langs?username=ruchira-edirisinghe&disable_animations=true&layout=compact&langs_count=6&hide_border=true&bg_color=0D1117&title_color=7DF9FF&text_color=C9D1D9" height="154" alt="Top languages" />
 <br/>
-<img src="https://streak-stats.demolab.com/?user=ruchira-edirisinghe&disable_animations=true&hide_border=true&background=0D1117&stroke=30363D&ring=00B4D8&fire=FF5FD2&currStreakNum=7DF9FF&sideNums=E6EDF3&currStreakLabel=00B4D8&sideLabels=A78BFA&dates=8B949E" height="140" alt="GitHub streak" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ruchira-edirisinghe&theme=github_dark" height="140" alt="Repos per language" />
-
-</div>
+<img src="https://streak-stats.demolab.com/?user=ruchira-edirisinghe&disable_animations=true&hide_border=true&background=0D1117&stroke=30363D&ring=00B4D8&fire=FF5FD2&currStreakNum=7DF9FF&sideNums=E6EDF3&currStreakLabel=00B4D8&sideLabels=A78BFA&dates=8B949E" height="154" alt="GitHub streak" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ruchira-edirisinghe&theme=github_dark" height="154" alt="Repos per language" />
 
 <img src="assets/divider.svg" width="100%" alt="" />
 
@@ -67,3 +57,5 @@
 
 <!-- ═════════════════════════════ FOOTER ═════════════════════════════ -->
 <a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/footer.svg" width="100%" alt="Thanks for playing! Press start to visit my website." /></a>
+
+</div>
