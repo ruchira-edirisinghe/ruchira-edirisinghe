@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="226" height="72" viewBox="0 0 226 72" role="img" aria-label="Followers: 14">
+<rect x="1" y="1" width="224" height="70" rx="18" fill="#0d1117" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="1.5"/>
+<rect x="14" y="12" width="48" height="48" rx="14" fill="#a78bfa" fill-opacity="0.18"/>
+<g transform="translate(26 24)" fill="#a78bfa"><path fill-rule="evenodd" d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6v1H2v-1Zm15.5-9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5 2c-.9 0-1.7.2-2.4.5A7.5 7.5 0 0 1 18 20v1h5v-1.5c0-3.6-2.2-6.5-5-6.5Z"/></g>
+<text x="76" y="36" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="800" fill="#f0f6fc">14</text>
+<text x="76" y="55" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#8b949e">Followers</text>
+</svg>
