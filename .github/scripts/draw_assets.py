@@ -8,9 +8,9 @@ Usage: python .github/scripts/draw_assets.py
 import math
 import os
 
-from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
-                   SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, esc, glow_filter, glyph, header, logo, orb, panel,
-                   pixels, raised, shadow_filter, stars, svg)
+from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
+                   SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header, logo, orb, panel,
+                   pixels, plate, raised, shadow_filter, stars, svg)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets')
 
@@ -200,7 +200,7 @@ def hero():
 </g>
 {floaters}
 {words}'''
-    return svg(W, H, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable.", body, style)
+    return svg(W, H + PAD, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable.", body, style)
 
 
 # ─────────────────────────────── link tiles ───────────────────────────────
@@ -209,22 +209,22 @@ LINKS = {
     # kind: (name, kicker, handle, colour)
     'portfolio': ('Portfolio', 'VISIT', 'see my work', PEACH),
     'linkedin': ('LinkedIn', 'CONNECT', 'in/ruchiraedirisinghe', SKY),
-    'behance': ('Behance', 'GALLERY', 'ruchiraedirisinghe', LILAC),
     'instagram': ('Instagram', 'FOLLOW', '@ruchii_zzz', ROSE),
     'email': ('Email', 'SAY HI', 'drop me a line', BUTTER),
 }
 
 
-def button(kind, delay):
-    """A link as a clay tile that matches the stat tiles above it. The README puts five side by side,
-    each 20% wide, so the 12px gaps line up with the stats."""
+def button(kind, i):
+    """A link as a clay tile that matches the stat tiles above it. The README puts the four side by
+    side, each 25% wide; tile i sits i*3px in, so the tiles fill the row edge to edge with 12px gaps."""
     name, kicker, handle, col = LINKS[kind]
-    W, H = 200, 130
-    x, y, w, h = 6, 4, 188, 108
+    delay = i * 0.4
+    W, H = 250, 108 + 6 + PAD
+    x, y, w, h = i * 3, 0, 241, 108
     if kind == 'portfolio':
         icon = glyph('sparkles', x + 19, y + 16, 22, '#2e2a36', 2.3)
     else:
-        icon = logo({'email': 'gmail'}.get(kind, kind), x + 20, y + 17, 20, '#1769ff' if kind == 'behance' else None)
+        icon = logo({'email': 'gmail'}.get(kind, kind), x + 20, y + 17, 20)
     style = f'''
 .pop {{ animation: pop 6s ease-in-out infinite; animation-delay: {-delay}s; }}
 @keyframes pop {{ 0%, 8%, 100% {{ transform: translateY(0); }} 4% {{ transform: translateY(-4px); }} }}
@@ -305,7 +305,7 @@ def about():
 {panel(W, H, (PEACH[2], .1, 0, .6), 'a')}
 {header('a little about me', 'QUEST LOG', PEACH, '4 QUESTS · 1 CLEARED', 50, 40)}
 <g filter="url(#soft)">{''.join(out)}</g>'''
-    return svg(W, H, 'About me: UI/UX engineer and game developer at Funextreme Technology LLC; BSc (Hons) Computer Security, University of Plymouth, UK; exploring game design, motion, 3D and AI-powered workflows.', body, style)
+    return svg(W, H + PAD, 'About me: UI/UX engineer and game developer at Funextreme Technology LLC; BSc (Hons) Computer Security, University of Plymouth, UK; exploring game design, motion, 3D and AI-powered workflows.', body, style)
 
 
 # ─────────────────────────────── stack: inventory ───────────────────────────────
@@ -315,47 +315,48 @@ GROUPS = [
                             ('Illustrator', 'illustrator'), ('Blender', 'blender')]),
     ('CODE & GAMES', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
                            ('React', 'react'), ('Tailwind', 'tailwind'), ('Python', 'python'), ('Unity', 'unity'), ('C#', 'csharp')]),
-    ('AI & WORKFLOW', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Gemini', 'gemini'), ('Cursor', 'cursor'),
-                              ('Copilot', 'copilot'), ('Midjourney', 'midjourney'), ('Git', 'git'), ('GitHub', 'github'), ('Vercel', 'vercel')]),
+    ('AI & WORKFLOW', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Cursor', 'cursor'), ('Copilot', 'copilot'),
+                              ('Git', 'git'), ('GitHub', 'github')]),
 ]
 
 
 def stack():
-    W = 1000
-    sw, sh, gap = 88, 100, 14
-    x0 = (W - (9 * sw + 8 * gap)) / 2
-    out, y, n = [], 136, 0
+    """The toolbox as loose inventory slots (no panel). Each group fills the full width, so the
+    shorter groups get wider slots."""
+    W, gap, sh = 1000, 14, 100
+    title, _ = plate('my toolbox', 'INVENTORY', SKY)
     total = sum(len(t) for _, _, t in GROUPS)
-    for title, col, tools in GROUPS:
-        out.append(f'<circle cx="{x0 + 5}" cy="{y - 5}" r="4" fill="{col[1]}"/>'
-                   f'<text x="{x0 + 16}" y="{y}" font-family="{MONO}" font-size="12" font-weight="800" letter-spacing="1.4" fill="{col[0]}">{esc(title)}</text>'
-                   f'<path d="M{x0 + 30 + len(title) * 8.4:.0f} {y - 4} H{W - x0}" stroke="{EDGE}" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>')
-        y += 16
+    out, y, n = [], 84, 0
+    for name_, col, tools in GROUPS:
+        chip, cw = chip_label(name_, col, 0, y)
+        out.append(chip + f'<path d="M{cw + 14} {y + 14} H{W}" stroke="{EDGE}" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>')
+        y += 44
+        k = len(tools)
+        sw = (W - (k - 1) * gap) / k
         for i, (name, key) in enumerate(tools):
-            x = x0 + i * (sw + gap)
-            out.append(f'''<g transform="translate({x:.0f} {y})">
-  {raised(0, 0, sw, sh, 18)}
-  <rect x="8" y="8" width="{sw - 16}" height="60" rx="13" fill="{SLOT}"/>
-  <rect x="8.75" y="8.75" width="{sw - 17.5}" height="58.5" rx="12.25" fill="none" stroke="{col[2]}" stroke-opacity=".35" stroke-width="1.5"/>
-  <ellipse cx="{sw / 2}" cy="60" rx="18" ry="3.5" fill="#000" opacity=".5"/>
-  <g class="item" style="animation-delay:{-n * .37:.2f}s">{logo(key, sw / 2 - 17, 21, 34)}</g>
-  <clipPath id="c{n}"><rect x="8" y="8" width="{sw - 16}" height="60" rx="13"/></clipPath>
-  <g clip-path="url(#c{n})"><rect class="glint" style="animation-delay:{n * .16:.2f}s" x="-30" y="0" width="22" height="80" fill="#fff" opacity=".13" transform="skewX(-22)"/></g>
-  <text x="{sw / 2}" y="88" font-family="{SANS}" font-size="12.5" font-weight="700" fill="{TEXT}" text-anchor="middle">{esc(name)}</text>
+            x = i * (sw + gap)
+            out.append(f'''<g transform="translate({x:.1f} {y})">
+  {raised(0, 0, round(sw, 1), sh, 18)}
+  <rect x="8" y="8" width="{sw - 16:.1f}" height="60" rx="13" fill="{SLOT}"/>
+  <rect x="8.75" y="8.75" width="{sw - 17.5:.1f}" height="58.5" rx="12.25" fill="none" stroke="{col[2]}" stroke-opacity=".35" stroke-width="1.5"/>
+  <ellipse cx="{sw / 2:.1f}" cy="60" rx="18" ry="3.5" fill="#000" opacity=".5"/>
+  <g class="item" style="animation-delay:{-n * .37:.2f}s">{logo(key, round(sw / 2 - 17, 1), 21, 34)}</g>
+  <clipPath id="c{n}"><rect x="8" y="8" width="{sw - 16:.1f}" height="60" rx="13"/></clipPath>
+  <g clip-path="url(#c{n})"><rect class="glint" style="animation-delay:{n * .2:.2f}s" x="-30" y="0" width="22" height="80" fill="#fff" opacity=".13" transform="skewX(-22)"/></g>
+  <text x="{sw / 2:.1f}" y="88" font-family="{SANS}" font-size="12.5" font-weight="700" fill="{TEXT}" text-anchor="middle">{esc(name)}</text>
 </g>''')
             n += 1
-        y += sh + 44
-    H = y - 14
+        y += sh + 6 + 30
+    H = y - 30 + PAD
     style = '''
 .item { animation: hover 3.6s ease-in-out infinite; }
 @keyframes hover { 50% { transform: translateY(-3px); } }
 .glint { animation: glint 9s ease-in-out infinite; }
-@keyframes glint { 0% { transform: skewX(-22deg) translateX(0); } 8%, 100% { transform: skewX(-22deg) translateX(150px); } }
+@keyframes glint { 0% { transform: skewX(-22deg) translateX(0); } 8%, 100% { transform: skewX(-22deg) translateX(220px); } }
 '''
-    body = f'''<defs>{shadow_filter('soft', 6, 6, 0.45)}</defs>
-{panel(W, H, (SKY[2], .9, .1, .6), 's')}
-{header('my toolbox', 'INVENTORY', SKY, f'{total}/{total} ITEMS EQUIPPED', x0, 40)}
-<g filter="url(#soft)">{''.join(out)}</g>'''
+    body = f'''<defs>{shadow_filter('soft', 6, 6, 0.35)}</defs>
+<g filter="url(#soft)">{title}{''.join(out)}</g>
+<text x="{W}" y="34" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="end">{total}/{total} ITEMS EQUIPPED</text>'''
     names = ', '.join(name for _, _, tools in GROUPS for name, _ in tools)
     return svg(W, H, f'My toolbox: {names}', body, style)
 
@@ -363,7 +364,8 @@ def stack():
 # ─────────────────────────────── divider & footer ───────────────────────────────
 
 def divider():
-    W, H = 1000, 44
+    # Coins centred between the blocks around them: the block above leaves PAD under itself.
+    W, H = 1000, 20 + 9 + 11 + PAD
     coins = ''.join(
         f'<g transform="translate({440 + i * 30} 20)"><g class="b" style="animation-delay:{i * .18:.2f}s">'
         f'<g class="spin" style="animation-delay:{-i * .3:.1f}s">{coin(0, 0, 9, f"c{i}")}</g></g></g>' for i in range(5))
@@ -373,7 +375,7 @@ def divider():
 .spin { animation: spin 2.4s linear infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes spin { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.12); } }
 '''
-    body = (f'<path d="M60 22 H400 M600 22 H940" stroke="{LILAC[2]}" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>{coins}')
+    body = (f'<path d="M60 20 H400 M600 20 H940" stroke="{LILAC[2]}" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>{coins}')
     return svg(W, H, '', body, style)
 
 
@@ -417,7 +419,7 @@ def footer():
 <g class="spark">{sparks}</g>
 <g filter="url(#soft)">{base}{button_}</g>
 <text class="coin" x="{gx:.0f}" y="232" font-family="{MONO}" font-size="12" font-weight="800" letter-spacing="2" fill="{BUTTER[1]}" text-anchor="middle">INSERT COIN</text>'''
-    return svg(W, H, "Thanks for playing! Press the button to visit my website.", body, style)
+    return svg(W, H + PAD, "Thanks for playing! Press the button to visit my website.", body, style)
 
 
 def main():
@@ -427,7 +429,7 @@ def main():
         'stack.svg': stack(),
         'divider.svg': divider(),
         'footer.svg': footer(),
-        **{f'btn-{kind}.svg': button(kind, i * 0.4) for i, kind in enumerate(LINKS)},
+        **{f'btn-{kind}.svg': button(kind, i) for i, kind in enumerate(LINKS)},
     }
     os.makedirs(OUT, exist_ok=True)
     for name, text in files.items():

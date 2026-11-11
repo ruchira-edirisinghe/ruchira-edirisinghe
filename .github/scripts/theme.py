@@ -44,6 +44,10 @@ SLATE_LIGHT = ('#615a80', '#4f496b', '#433d5d')
 
 C30, S30 = math.cos(math.pi / 6), 0.5
 
+# Every block leaves this much clear space under itself for its shadow, so the gaps
+# between blocks in the README come out the same everywhere.
+PAD = 14
+
 REDUCED = '@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }'
 
 
@@ -63,9 +67,12 @@ def panel(w, h, glow=None, uid='p'):
         g = (f'<radialGradient id="{uid}glow" cx="{cx}" cy="{cy}" r="{r}"><stop offset="0" stop-color="{color}" stop-opacity=".22"/>'
              f'<stop offset="1" stop-color="{color}" stop-opacity="0"/></radialGradient>')
     return (
-        f'<defs><linearGradient id="{uid}bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{PANEL_TOP}"/>'
+        f'<defs><filter id="{uid}sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="6" stdDeviation="5" '
+        f'flood-color="#05040a" flood-opacity=".35"/></filter>'
+        f'<linearGradient id="{uid}bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{PANEL_TOP}"/>'
         f'<stop offset="1" stop-color="{PANEL}"/></linearGradient>{g}'
         f'<pattern id="{uid}dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#fff" opacity=".045"/></pattern></defs>'
+        f'<rect width="{w}" height="{h}" rx="30" fill="{PANEL}" filter="url(#{uid}sh)"/>'
         f'<rect width="{w}" height="{h}" rx="30" fill="url(#{uid}bg)"/>'
         f'<rect width="{w}" height="{h}" rx="30" fill="url(#{uid}dots)"/>'
         + (f'<rect width="{w}" height="{h}" rx="30" fill="url(#{uid}glow)"/>' if glow else '')
@@ -87,6 +94,26 @@ def header(title, kicker, color, right='', x=50, y=50):
         out += (f'<text x="{1000 - x}" y="{y + 16.5}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" '
                 f'fill="{TEXT_DIM}" text-anchor="end">{right}</text>')
     return out
+
+
+def plate(title, kicker, color, x=0, y=0):
+    """A section title on its own small raised plate, for sections drawn without a panel:
+    it stays readable on GitHub's light and dark pages. Returns (svg, width)."""
+    tag_w = 24 + len(kicker) * 8.2
+    w = round(tag_w + 44 + len(title) * 13.2)
+    return (f'<g transform="translate({x} {y})">{raised(0, 0, w, 56, 20)}'
+            f'<rect x="14" y="16" width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" fill-opacity=".28" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
+            f'<text x="{14 + tag_w / 2:.0f}" y="32.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="1.4" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text>'
+            f'<text x="{tag_w + 30:.0f}" y="36.5" font-family="{SANS}" font-size="24" font-weight="800" fill="{TEXT}">{esc(title)}</text></g>'), w
+
+
+def chip_label(text, color, x, y):
+    """A small solid label (a dot and a word) that reads on any background. Returns (svg, width)."""
+    w = round(34 + len(text) * 8.3)
+    return (f'<g transform="translate({x} {y})"><rect y="3" width="{w}" height="26" rx="13" fill="{LIP}"/>'
+            f'<rect width="{w}" height="26" rx="13" fill="{CARD}"/>'
+            f'<circle cx="15" cy="13" r="4" fill="{color[1]}"/>'
+            f'<text x="26" y="17.5" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.3" fill="{color[0]}">{esc(text)}</text></g>'), w
 
 
 def shadow_filter(fid, dy=10, blur=12, opacity=0.5, color='#05040a'):
