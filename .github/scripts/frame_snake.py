@@ -27,7 +27,7 @@ def main():
     top = 0
     H = round(top + h + 18 + PAD)
     body = f'''<svg x="0" y="{top}" width="{W}" height="{h:.0f}" viewBox="{vb}">{inner}</svg>
-<text x="{W / 2}" y="{H - PAD - 4}" font-family="{MONO}" font-size="11" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="middle">ONE SQUARE = ONE DAY OF CONTRIBUTIONS · LAST 12 MONTHS</text>'''
+<text x="{W / 2}" y="{H - PAD - 4}" font-family="{MONO}" font-size="11" font-weight="700" letter-spacing=".5" fill="{TEXT_DIM}" text-anchor="middle">One Square = One Day Of Contributions · Last 12 Months</text>'''
     with open(out, 'w', encoding='utf-8', newline='\n') as f:
         f.write(svg(W, H, 'A snake eating my contribution graph', body))
 

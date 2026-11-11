@@ -205,8 +205,8 @@ def player(s):
     big = f'''<g>{raised(0, 0, 296, 196, 24)}
   <g class="bob"><circle cx="48" cy="52" r="26" fill="{BUTTER[2]}"/><circle cx="48" cy="47" r="26" fill="{BUTTER[0]}"/>
   <circle cx="48" cy="47" r="20" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>{glyph('flame', 35, 34, 26, INK, 2.3)}</g>
-  <text x="90" y="44" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.4" fill="{BUTTER[1]}">LIFETIME</text>
-  <text x="90" y="62" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.4" fill="{BUTTER[1]}">CONTRIBUTIONS</text>
+  <text x="90" y="44" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing=".5" fill="{BUTTER[1]}">Lifetime</text>
+  <text x="90" y="62" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing=".5" fill="{BUTTER[1]}">Contributions</text>
   <text x="24" y="138" font-family="{SANS}" font-size="52" font-weight="900" fill="{TEXT}">{fmt(s['total'])}</text>
   <text x="24" y="170" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}">since {s['joined']:%b %Y} · private repos included</text>
 </g>'''
@@ -252,7 +252,7 @@ def streak(s):
 <linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BUTTER[1]}"/><stop offset="1" stop-color="{PEACH[2]}"/></linearGradient></defs>
 {panel(W, H, (PEACH[2], .5, .6, .5), 'st')}
 {stars(W, H, 14, 3)}
-{header_center('streak', 'COMBO', PEACH, cx, 30, 'DAYS IN A ROW', 26)}
+{header_center('My Streak', 'Combo', PEACH, cx, 30, 'Days In A Row', 26)}
 {column(84, fmt(s['total']), 'Contributions', f"since {s['joined']:%b} {s['joined'].year}", SKY[1])}
 {column(W - 84, s['longest'], 'Best combo', span(s['longest_range']), LILAC[1])}
 {glow}
@@ -284,7 +284,7 @@ def languages(s):
                     f'<text x="390" y="{y + 11}" font-family="{MONO}" font-size="12" font-weight="700" fill="{TEXT_SOFT}" text-anchor="end">{size / total * 100:.1f}%</text>'
                     f'<text x="{W - 36}" y="{y + 11}" font-family="{MONO}" font-size="11" fill="{TEXT_DIM}" text-anchor="end">{f"{n} repo" + ("s" if n > 1 else "") if n else "·"}</text>')
     body = f'''{panel(W, H, (SKY[2], .9, .1, .6), 'lg')}
-{header_center('top languages', 'SKILL TREE', SKY, W / 2, 30, 'BY CODE SIZE · PRIVATE REPOS TOO', 26)}
+{header_center('Top Languages', 'Skill Tree', SKY, W / 2, 30, 'By Code Size · Private Repos Too', 26)}
 {''.join(rows)}'''
     label = 'Top languages: ' + ', '.join(f'{n} {sz / total * 100:.0f}%' for n, sz, _ in top)
     return body, GROW, label
