@@ -203,36 +203,48 @@ def hero():
     return svg(W, H, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable.", body, style)
 
 
-# ─────────────────────────────── buttons ───────────────────────────────
+# ─────────────────────────────── link tiles ───────────────────────────────
 
-def button(kind, label, col, delay):
-    W, H = 196, 62
-    w = W - 8
+LINKS = {
+    # kind: (name, kicker, handle, colour)
+    'portfolio': ('Portfolio', 'VISIT', 'see my work', PEACH),
+    'linkedin': ('LinkedIn', 'CONNECT', 'in/ruchiraedirisinghe', SKY),
+    'behance': ('Behance', 'GALLERY', 'ruchiraedirisinghe', LILAC),
+    'instagram': ('Instagram', 'FOLLOW', '@ruchii_zzz', ROSE),
+    'email': ('Email', 'SAY HI', 'drop me a line', BUTTER),
+}
+
+
+def button(kind, delay):
+    """A link as a clay tile that matches the stat tiles above it. The README puts five side by side,
+    each 20% wide, so the 12px gaps line up with the stats."""
+    name, kicker, handle, col = LINKS[kind]
+    W, H = 200, 130
+    x, y, w, h = 6, 4, 188, 108
     if kind == 'portfolio':
-        icon = glyph('sparkles', 20, 16, 22, col[0], 2.3)
+        icon = glyph('sparkles', x + 19, y + 16, 22, '#2e2a36', 2.3)
     else:
-        icon = logo({'email': 'gmail'}.get(kind, kind), 21, 17, 20, '#1769ff' if kind == 'behance' else None)
+        icon = logo({'email': 'gmail'}.get(kind, kind), x + 20, y + 17, 20, '#1769ff' if kind == 'behance' else None)
     style = f'''
-.cap {{ animation: tap 7s ease-in-out infinite; animation-delay: {delay}s; }}
-@keyframes tap {{ 0%, 6%, 100% {{ transform: translateY(0); }} 3% {{ transform: translateY(4px); }} }}
-.shine {{ animation: shine 7s ease-in-out infinite; animation-delay: {delay}s; }}
-@keyframes shine {{ 0%, 4% {{ transform: skewX(-20deg) translateX(-60px); }} 18%, 100% {{ transform: skewX(-20deg) translateX(260px); }} }}
+.pop {{ animation: pop 6s ease-in-out infinite; animation-delay: {-delay}s; }}
+@keyframes pop {{ 0%, 8%, 100% {{ transform: translateY(0); }} 4% {{ transform: translateY(-4px); }} }}
+.shine {{ animation: shine 6s ease-in-out infinite; animation-delay: {delay}s; }}
+@keyframes shine {{ 0%, 4% {{ transform: skewX(-20deg) translateX(-60px); }} 22%, 100% {{ transform: skewX(-20deg) translateX(300px); }} }}
+.go {{ animation: go 2.4s ease-in-out infinite; animation-delay: {-delay}s; }}
+@keyframes go {{ 50% {{ transform: translate(2px, -2px); }} }}
 '''
-    body = f'''<defs>{shadow_filter('s', 5, 5, 0.45)}
-<clipPath id="pill"><rect x="4" y="5" width="{w}" height="44" rx="22"/></clipPath>
-<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-<g filter="url(#s)">
-<rect x="4" y="10" width="{w}" height="44" rx="22" fill="{LIP}"/>
-<g class="cap">
-<rect x="4" y="5" width="{w}" height="44" rx="22" fill="{CARD}"/>
-<rect x="4.75" y="5.75" width="{w - 1.5}" height="42.5" rx="21.25" fill="none" stroke="{col[1]}" stroke-opacity=".55" stroke-width="1.5"/>
-<g clip-path="url(#pill)"><rect class="shine" x="0" y="0" width="50" height="60" fill="url(#g)" transform="skewX(-20)"/></g>
-<circle cx="31" cy="27" r="16" fill="{CARD_TOP}"/>
-{icon}
-<text x="56" y="32.5" font-family="{SANS}" font-size="16" font-weight="700" fill="{TEXT}">{label}</text>
-<path d="M{w - 22} 22 l6 5 l-6 5" fill="none" stroke="{col[1]}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-</g></g>'''
-    return svg(W, H, label, body, style)
+    body = f'''<defs>{shadow_filter('soft', 6, 6, 0.35)}
+<clipPath id="tile"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="18"/></clipPath>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<g filter="url(#soft)">{raised(x, y, w, h, 18)}</g>
+<g clip-path="url(#tile)"><rect class="shine" x="0" y="0" width="60" height="{H}" fill="url(#g)" transform="skewX(-20)"/></g>
+<g class="pop"><circle cx="{x + 30}" cy="{y + 30}" r="19" fill="{col[1]}"/><circle cx="{x + 30}" cy="{y + 27}" r="19" fill="{col[0]}"/>{icon}</g>
+<text x="{x + 60}" y="{y + 31}" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing="1.3" fill="{col[1]}">{kicker}</text>
+<g transform="translate({x + w - 30} {y + 27})"><circle r="13" fill="{CARD_TOP}"/>
+<g class="go"><path d="M-4 4 L4 -4 M-2.5 -4 H4 V2.5" fill="none" stroke="{col[1]}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="{x + 18}" y="{y + 78}" font-family="{SANS}" font-size="21" font-weight="800" fill="{TEXT}">{name}</text>
+<text x="{x + 18}" y="{y + 96}" font-family="{MONO}" font-size="11" fill="{TEXT_DIM}">{esc(handle)}</text>'''
+    return svg(W, H, f'{name}: {handle}', body, style)
 
 
 # ─────────────────────────────── about: quest log ───────────────────────────────
@@ -415,11 +427,7 @@ def main():
         'stack.svg': stack(),
         'divider.svg': divider(),
         'footer.svg': footer(),
-        'btn-portfolio.svg': button('portfolio', 'Portfolio', PEACH, 0.0),
-        'btn-linkedin.svg': button('linkedin', 'LinkedIn', SKY, 0.35),
-        'btn-behance.svg': button('behance', 'Behance', LILAC, 0.7),
-        'btn-instagram.svg': button('instagram', 'Instagram', ROSE, 1.05),
-        'btn-email.svg': button('email', 'Email', BUTTER, 1.4),
+        **{f'btn-{kind}.svg': button(kind, i * 0.4) for i, kind in enumerate(LINKS)},
     }
     os.makedirs(OUT, exist_ok=True)
     for name, text in files.items():

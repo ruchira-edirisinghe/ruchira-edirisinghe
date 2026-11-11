@@ -5,15 +5,10 @@
 
 <img src="assets/hero.svg" width="100%" alt="Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable." />
 
-<br/><br/>
-
-<a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/btn-portfolio.svg" height="46" alt="Portfolio" /></a>
-<a href="https://www.linkedin.com/in/ruchiraedirisinghe/"><img src="assets/btn-linkedin.svg" height="46" alt="LinkedIn" /></a>
-<a href="https://www.behance.net/ruchiraedirisinghe"><img src="assets/btn-behance.svg" height="46" alt="Behance" /></a>
-<a href="https://www.instagram.com/ruchii_zzz/"><img src="assets/btn-instagram.svg" height="46" alt="Instagram" /></a>
-<a href="mailto:ruchiraedirisinghe0@gmail.com"><img src="assets/btn-email.svg" height="46" alt="Email" /></a>
-
 <img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-player.svg" width="100%" alt="My GitHub stats, private repos included" />
+
+<!-- one line with no spaces, so the five 20% tiles fill the row like the stat tiles -->
+<a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/btn-portfolio.svg" width="20%" alt="Portfolio" /></a><a href="https://www.linkedin.com/in/ruchiraedirisinghe/"><img src="assets/btn-linkedin.svg" width="20%" alt="LinkedIn" /></a><a href="https://www.behance.net/ruchiraedirisinghe"><img src="assets/btn-behance.svg" width="20%" alt="Behance" /></a><a href="https://www.instagram.com/ruchii_zzz/"><img src="assets/btn-instagram.svg" width="20%" alt="Instagram" /></a><a href="mailto:ruchiraedirisinghe0@gmail.com"><img src="assets/btn-email.svg" width="20%" alt="Email" /></a>
 
 <img src="assets/divider.svg" width="100%" alt="" />
 
