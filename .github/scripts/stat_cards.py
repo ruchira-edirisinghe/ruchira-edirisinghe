@@ -14,7 +14,7 @@ import sys
 import urllib.request
 from collections import Counter
 
-from theme import (BUTTER, CARD_TOP, LILAC, LIP, MONO, PEACH, ROSE, SAGE, SANS, SKY, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE,
+from theme import (BUTTER, CARD_TOP, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE,
                    esc, glyph, header, panel, raised, shadow_filter, stars, svg)
 
 INK = '#2e2a36'
@@ -180,7 +180,9 @@ GROW = '''
 
 def player(s):
     """The headline numbers as loose clay tiles (no panel), to sit right under the hero."""
-    W, H = 1000, 214
+    # Flush with the panels (x 0..1000). The link tiles follow on the next line of the same
+    # paragraph, so only a little space is left underneath.
+    W, H = 1000, 92 + 12 + 92 + 6 + 6
     tiles = [
         ('git-pull-request', LILAC, s['prs'], 'Pull requests'),
         ('bug', ROSE, s['issues'], 'Issues'),
@@ -191,17 +193,17 @@ def player(s):
         ('eye', SKY, s['views'], 'Profile views'),
         ('calendar-days', PEACH, s['year'], f"{s['today'].year} so far"),
     ]
-    tw, th, gap, tx0 = 162, 92, 12, 312
+    tw, th, gap, tx0 = 164, 92, 12, 308
     out = []
     for i, (icon, col, value, label) in enumerate(tiles):
-        x, y = tx0 + (i % 4) * (tw + gap), 4 + (i // 4) * (th + gap)
+        x, y = tx0 + (i % 4) * (tw + gap), (i // 4) * (th + gap)
         out.append(f'''<g transform="translate({x} {y})">{raised(0, 0, tw, th, 18)}
   <g class="pop" style="animation-delay:{-i * .4:.1f}s"><circle cx="30" cy="30" r="16" fill="{col[1]}"/><circle cx="30" cy="27" r="16" fill="{col[0]}"/>{glyph(icon, 21, 18, 18, INK, 2.4)}</g>
   <text x="56" y="32" font-family="{SANS}" font-size="12.5" font-weight="700" fill="{TEXT_SOFT}">{esc(label)}</text>
   <text x="18" y="77" font-family="{SANS}" font-size="26" font-weight="800" fill="{TEXT}">{fmt(value)}</text>
 </g>''')
 
-    big = f'''<g transform="translate(4 4)">{raised(0, 0, 292, 196, 24)}
+    big = f'''<g>{raised(0, 0, 296, 196, 24)}
   <g class="bob"><circle cx="48" cy="52" r="26" fill="{BUTTER[2]}"/><circle cx="48" cy="47" r="26" fill="{BUTTER[0]}"/>
   <circle cx="48" cy="47" r="20" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>{glyph('flame', 35, 34, 26, INK, 2.3)}</g>
   <text x="90" y="44" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.4" fill="{BUTTER[1]}">LIFETIME</text>
@@ -223,7 +225,7 @@ def player(s):
 
 
 def streak(s):
-    W, H = 490, 290
+    W, H = 494, 290
     cx = W / 2
 
     def column(x, value, label, sub, col):
@@ -259,11 +261,11 @@ def streak(s):
 @keyframes flick { 50% { transform: scale(1.08, .94) rotate(-3deg); } }
 '''
     label = f"Contribution streak: {s['current']} days now, best {s['longest']} days, {s['total']:,} contributions in total."
-    return svg(W, H, label, body, style)
+    return body, style, label
 
 
 def languages(s):
-    W, H = 490, 290
+    W, H = 494, 290
     top = s['langs'][:6]
     total = sum(size for _, size, _ in s['langs']) or 1
     rows = []
@@ -280,7 +282,15 @@ def languages(s):
 <text x="{W - 36}" y="50.5" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="end">BY CODE SIZE</text>
 {''.join(rows)}'''
     label = 'Top languages: ' + ', '.join(f'{n} {sz / total * 100:.0f}%' for n, sz, _ in top)
-    return svg(W, H, label, body, GROW)
+    return body, GROW, label
+
+
+def streak_and_languages(s):
+    """The streak and top languages panels side by side in one image, with the same 12px gap as the tiles."""
+    b1, s1, l1 = streak(s)
+    b2, s2, l2 = languages(s)
+    body = f'<g>{b1}</g>\n<g transform="translate(506 0)">{b2}</g>'
+    return svg(1000, 290 + PAD, f'{l1} {l2}', body, s1 + s2)
 
 
 def main():
@@ -289,8 +299,7 @@ def main():
     s = collect(login)
     cards = {
         'stats-player.svg': player(s),
-        'stats-streak.svg': streak(s),
-        'stats-languages.svg': languages(s),
+        'stats-streak-languages.svg': streak_and_languages(s),
     }
     for name, text in cards.items():
         with open(os.path.join(out, name), 'w', encoding='utf-8', newline='\n') as f:
