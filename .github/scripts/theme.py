@@ -107,7 +107,7 @@ def plate(title, kicker, color, x=0, y=0):
             f'<text x="{tag_w + 30:.0f}" y="36.5" font-family="{SANS}" font-size="24" font-weight="800" fill="{TEXT}">{esc(title)}</text></g>'), w
 
 
-def header_float(title, kicker, color, cx, y=0, size=30):
+def header_float(text, kicker, color, cx, y=0, size=28):
     """header_center for sections with no panel behind them: a solid tag, and the title outlined in
     the dark lip colour so it reads on GitHub's light page as well as the dark one."""
     tag_w = 26 + len(kicker) * 7.4
@@ -116,8 +116,8 @@ def header_float(title, kicker, color, cx, y=0, size=30):
             f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{CARD}"/>'
             f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
             f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
-            f'<text x="{cx}" y="{y + 30 + size}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{TEXT}" text-anchor="middle" '
-            f'stroke="{LIP}" stroke-width="6" stroke-linejoin="round" paint-order="stroke">{esc(title)}</text>')
+            + title(text, cx, y + 30 + size, size, anchor='middle',
+                    extra=f' stroke="{LIP}" stroke-width="6" stroke-linejoin="round" paint-order="stroke"'))
 
 
 def chip_label(text, color, x, y):
@@ -129,7 +129,7 @@ def chip_label(text, color, x, y):
             f'<text x="26" y="17.5" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing=".5" fill="{color[0]}">{esc(text)}</text></g>'), w
 
 
-def header_center(title, kicker, color, cx, y=36, sub='', size=30):
+def header_center(text, kicker, color, cx, y=36, sub='', size=28):
     """A section title centred on cx: the arcade tag, the title under it, and an optional dim line."""
     tag_w = 26 + len(kicker) * 7.4
     out = (f'<g transform="translate({cx - tag_w / 2:.1f} {y})">'
@@ -137,11 +137,36 @@ def header_center(title, kicker, color, cx, y=36, sub='', size=30):
            f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".22"/>'
            f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
            f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
-           f'<text x="{cx}" y="{y + 30 + size}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(title)}</text>')
+           + title(text, cx, y + 30 + size, size, anchor='middle'))
     if sub:
         out += (f'<text x="{cx}" y="{y + 54 + size}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing=".5" '
                 f'fill="{TEXT_DIM}" text-anchor="middle">{esc(sub)}</text>')
     return out
+
+
+_TITLES = None
+
+
+def title(text, x, y, size, fill=TEXT, anchor='start', extra=''):
+    """A title set in Epic Pro (my portfolio's display face), drawn from the outlines in titles.json
+    (made by make_titles.py), so no font has to load. y is the baseline. Falls back to plain text
+    for a title that hasn't been outlined yet."""
+    global _TITLES
+    if _TITLES is None:
+        import json
+        with open(os.path.join(HERE, 'titles.json'), encoding='utf-8') as f:
+            _TITLES = json.load(f)
+    t = _TITLES.get(text)
+    if t is None:
+        a = {'start': 'start', 'middle': 'middle', 'end': 'end'}[anchor]
+        return (f'<text x="{x}" y="{y}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{fill}" '
+                f'text-anchor="{a}"{extra}>{esc(text)}</text>')
+    k = size / t['upm']
+    w = t['width'] * k
+    x0 = x - (w / 2 if anchor == 'middle' else w if anchor == 'end' else 0)
+    # Strokes are drawn in font units here, so scale any stroke width up to match.
+    extra = re.sub(r'stroke-width="([\d.]+)"', lambda m: f'stroke-width="{float(m.group(1)) / k:.0f}"', extra)
+    return f'<path transform="translate({x0:.1f} {y}) scale({k:.4f})" fill="{fill}"{extra} d="{t["d"]}"/>'
 
 
 def shadow_filter(fid, dy=10, blur=12, opacity=0.5, color='#05040a'):
