@@ -1,19 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="196" height="62" viewBox="0 0 196 62" role="img" aria-label="LinkedIn">
 <title>LinkedIn</title>
 <style>
-.cap { animation: press 7s ease-in-out infinite; animation-delay: 0.35s; }
-@keyframes press { 0%, 6%, 100% { transform: translateY(0); } 3% { transform: translateY(4px); } }
+.cap { animation: tap 7s ease-in-out infinite; animation-delay: 0.35s; }
+@keyframes tap { 0%, 6%, 100% { transform: translateY(0); } 3% { transform: translateY(4px); } }
+.shine { animation: shine 7s ease-in-out infinite; animation-delay: 0.35s; }
+@keyframes shine { 0%, 4% { transform: skewX(-20deg) translateX(-60px); } 18%, 100% { transform: skewX(-20deg) translateX(260px); } }
 
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }</style>
-<defs><filter id="s" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#5b4a3a" flood-opacity="0.16"/></filter><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }</style>
+<defs><filter id="s" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#05040a" flood-opacity="0.45"/></filter>
+<clipPath id="pill"><rect x="4" y="5" width="188" height="44" rx="22"/></clipPath>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
 <g filter="url(#s)">
-<rect x="4" y="10" width="188" height="44" rx="22" fill="#8fb6dc"/>
+<rect x="4" y="10" width="188" height="44" rx="22" fill="#0c0a12"/>
 <g class="cap">
-<rect x="4" y="5" width="188" height="44" rx="22" fill="#d3e6f7"/>
-<rect x="4" y="5" width="188" height="44" rx="22" fill="url(#g)"/>
-<circle cx="31" cy="27" r="16" fill="#fffaf4"/>
-<g transform="translate(31 27)"><text y="5.5" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="800" fill="#8fb6dc" text-anchor="middle">in</text></g>
-<text x="56" y="32.5" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="700" fill="#2e2a36">LinkedIn</text>
-<path d="M166 22 l6 5 l-6 5" fill="none" stroke="#6f6878" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="4" y="5" width="188" height="44" rx="22" fill="#24203a"/>
+<rect x="4.75" y="5.75" width="186.5" height="42.5" rx="21.25" fill="none" stroke="#acceec" stroke-opacity=".55" stroke-width="1.5"/>
+<g clip-path="url(#pill)"><rect class="shine" x="0" y="0" width="50" height="60" fill="url(#g)" transform="skewX(-20)"/></g>
+<circle cx="31" cy="27" r="16" fill="#2b2645"/>
+<svg x="21" y="17" width="20" height="20" viewBox="0 0 256 256" overflow="visible"><g><path fill="#0a66c2" d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4c-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.91 39.91 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186zM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009s9.851-22.014 22.008-22.016c12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97zM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453"/></g></svg>
+<text x="56" y="32.5" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="700" fill="#f6efe7">LinkedIn</text>
+<path d="M166 22 l6 5 l-6 5" fill="none" stroke="#acceec" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 </g></g>
 </svg>
