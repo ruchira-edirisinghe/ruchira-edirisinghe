@@ -10,7 +10,7 @@ import os
 
 from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
                    SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header_center, header_float, logo, orb, panel,
-                   pixels, raised, shadow_filter, stars, svg)
+                   pixels, raised, shadow_filter, stars, svg, title)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets')
 
@@ -33,7 +33,7 @@ def coin(cx, cy, r, uid):
 # ─────────────────────────────── hero ───────────────────────────────
 
 def hero():
-    W, H = 1000, 480
+    W, H = 1000, 420
     iso = Iso(712, 176)
 
     slab = iso.box(0, 0, 0, 260, 200, 24, SLATE)
@@ -113,13 +113,13 @@ def hero():
 
     # Words on the left.
     def name(text, y):
-        layers = ''.join(f'<text x="60" y="{y + d}" font-family="{SANS}" font-size="64" font-weight="800" fill="{c}">{text}</text>'
-                         for d, c in [(7, '#2b2346'), (5, '#4a3f78'), (3, '#6c5fa3')])
-        return layers + f'<text x="60" y="{y}" font-family="{SANS}" font-size="64" font-weight="800" fill="url(#namefill)">{text}</text>'
+        # Set in Epic Pro, my portfolio's display face, with a soft clay extrusion under it.
+        layers = ''.join(title(text, 62, y + d, 58, c) for d, c in [(7, '#2b2346'), (5, '#4a3f78'), (3, '#6c5fa3')])
+        return layers + title(text, 62, y, 58, 'url(#namefill)')
 
     def chip(x, label, col):
         w = 40 + len(label) * 8.4
-        return (f'<g transform="translate({x:.0f} 364)">{raised(0, 0, round(w), 34, 17, CARD, LIP, 4, CARD_TOP)}'
+        return (f'<g transform="translate({x:.0f} 310)">{raised(0, 0, round(w), 34, 17, CARD, LIP, 4, CARD_TOP)}'
                 f'<circle cx="18" cy="17" r="5" fill="{col[1]}"/>'
                 f'<text x="30" y="22.5" font-family="{SANS}" font-size="14" font-weight="700" fill="{col[0]}">{label}</text></g>'), w
 
@@ -129,17 +129,12 @@ def hero():
         chips.append(c)
         cx_ += w + 10
 
-    # The words sit centred top to bottom: 78px clear above the 1P badge and below the tags.
-    hud = f'''<g>
-  <rect x="58" y="78" width="44" height="24" rx="8" fill="{BUTTER[1]}"/>
-  <text x="80" y="95" font-family="{MONO}" font-size="13" font-weight="800" fill="#2e2a36" text-anchor="middle">1P</text>
-</g>'''
-
+    # The words sit centred top to bottom in the banner.
     words = '\n'.join([
-        f'<text x="62" y="140" font-family="{MONO}" font-size="15" fill="{BUTTER[0]}">&gt; Hello World! I\'m</text>',
-        name('Ruchira', 210),
-        name('Edirisinghe', 280),
-        f'<text x="62" y="332" font-family="{SANS}" font-size="19" font-weight="600" fill="{TEXT_SOFT}">I turn ideas into interactive experiences.</text>',
+        f'<text x="62" y="86" font-family="{MONO}" font-size="15" fill="{BUTTER[0]}">&gt; Hello World! I\'m</text>',
+        name('Ruchira', 156),
+        name('Edirisinghe', 226),
+        f'<text x="62" y="278" font-family="{SANS}" font-size="19" font-weight="600" fill="{TEXT_SOFT}">I turn ideas into interactive experiences.</text>',
         *chips,
     ])
 
@@ -190,13 +185,14 @@ def hero():
     body = f'''{defs}
 {panel(W, H, (LILAC[2], .75, .45, .55), 'h')}
 {stars(W, H, 46)}
-{hud}
+<g transform="translate(730 192) scale(.88) translate(-730 -222)">
 {screen_glow}
 {ground}
 <g class="desk" filter="url(#soft)">
 {desk}
 </g>
 {floaters}
+</g>
 {words}'''
     return svg(W, H + PAD, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I turn ideas into interactive experiences.", body, style)
 
@@ -248,9 +244,9 @@ def button(kind, i):
 # ─────────────────────────────── about: quest log ───────────────────────────────
 
 def about():
-    """About me as four separate facts, each on its own pedestal: where I work, what I studied,
+    """About me as four separate facts, each a floating clay object: where I work, what I studied,
     what I'm exploring and what else I'm into. No path or levels, so nothing reads as a sequence."""
-    W, H = 1000, 396
+    W, H = 1000, 376
     facts = [
         (PEACH, 'briefcase', 'Working At', ['Funextreme', 'Technology LLC'], 'UI/UX Engineer & Game Developer'),
         (LILAC, 'cap', 'Studied', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK'),
@@ -279,32 +275,30 @@ def about():
 
     step = W / len(facts)
     xs = [step * (i + .5) for i in range(len(facts))]
-    py = 226  # centre of each pedestal's top
+    oy, floor = 180, 222  # where each object floats, and its shadow on the floor
 
     nodes = []
     for i, (col, kind, tag, lines, sub) in enumerate(facts):
         cx = xs[i]
         sw = 26 + len(tag) * 7.4
-        pedestal = (f'<ellipse cx="{cx:.0f}" cy="{py + 16}" rx="64" ry="22" fill="{col[2]}"/>'
-                    f'<rect x="{cx - 64:.0f}" y="{py}" width="128" height="16" fill="{col[2]}"/>'
-                    f'<ellipse cx="{cx:.0f}" cy="{py}" rx="64" ry="22" fill="{col[1]}"/>'
-                    f'<ellipse cx="{cx:.0f}" cy="{py - 2}" rx="54" ry="16" fill="{col[0]}"/>'
-                    f'<ellipse cx="{cx:.0f}" cy="{py}" rx="26" ry="6" fill="#000" opacity=".22"/>')
-        text = ''.join(f'<text x="{cx:.0f}" y="{310 + j * 22}" font-family="{SANS}" font-size="18" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(t)}</text>'
+        shadow = f'<ellipse class="shd o{i}" cx="{cx:.0f}" cy="{floor}" rx="34" ry="7" fill="#000" opacity=".45"/>'
+        text = ''.join(f'<text x="{cx:.0f}" y="{290 + j * 22}" font-family="{SANS}" font-size="18" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(t)}</text>'
                        for j, t in enumerate(lines))
         nodes.append(f'''<g>
-  {pedestal}
-  <g transform="translate({cx:.0f} {py - 44})"><g class="obj o{i}">{object_(kind, col)}</g></g>
-  <rect x="{cx - sw / 2:.0f}" y="266" width="{sw:.0f}" height="22" rx="11" fill="{col[2]}" fill-opacity=".2" stroke="{col[1]}" stroke-opacity=".55"/>
-  <text x="{cx:.0f}" y="281" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{col[0]}" text-anchor="middle">{tag}</text>
+  {shadow}
+  <g transform="translate({cx:.0f} {oy})"><g class="obj o{i}">{object_(kind, col)}</g></g>
+  <rect x="{cx - sw / 2:.0f}" y="246" width="{sw:.0f}" height="22" rx="11" fill="{col[2]}" fill-opacity=".2" stroke="{col[1]}" stroke-opacity=".55"/>
+  <text x="{cx:.0f}" y="261" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{col[0]}" text-anchor="middle">{tag}</text>
   {text}
-  <text x="{cx:.0f}" y="{310 + len(lines) * 22 + 2}" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}" text-anchor="middle">{esc(sub)}</text>
+  <text x="{cx:.0f}" y="{290 + len(lines) * 22 + 2}" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}" text-anchor="middle">{esc(sub)}</text>
 </g>''')
 
     style = '''
 .obj { animation: lift 4.5s ease-in-out infinite; }
 .o1 { animation-delay: -1.1s; } .o2 { animation-delay: -2.2s; } .o3 { animation-delay: -3.3s; }
 @keyframes lift { 50% { transform: translate(0, -6px); } }
+.shd { animation: shd 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes shd { 50% { transform: scale(.85); opacity: .3; } }
 '''
     body = f'''<defs>{shadow_filter('soft', 10, 12, 0.45)}</defs>
 {panel(W, H, (PEACH[2], .5, 0, .6), 'a')}
@@ -425,7 +419,7 @@ def footer():
 <g class="spark">{sparks}</g>
 <g filter="url(#soft)">{base_l}{button_}{base_r}{stick}</g>
 <text x="{cx}" y="62" font-family="{MONO}" font-size="13" font-weight="800" letter-spacing=".5" fill="{ROSE[1]}" text-anchor="middle">Game Over? Not Yet.</text>
-<text x="{cx}" y="110" font-family="{SANS}" font-size="36" font-weight="800" fill="{TEXT}" text-anchor="middle">Thanks For Playing!</text>
+{title('Thanks For Playing!', cx, 110, 32, anchor='middle')}
 <text x="{cont_x:.0f}" y="152" font-family="{MONO}" font-size="20" font-weight="800" fill="{BUTTER[0]}">Continue?</text>{digits}
 <text x="{cx}" y="188" font-family="{SANS}" font-size="16" font-weight="600" fill="{TEXT_SOFT}" text-anchor="middle">Visit my site to see what I'm building lately</text>
 <text x="{cx}" y="220" font-family="{MONO}" font-size="14" fill="{PEACH[1]}" text-anchor="middle">ruchiraedirisinghe.vercel.app<tspan class="caret" fill="{TEXT}">_</tspan></text>
