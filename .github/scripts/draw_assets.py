@@ -238,12 +238,12 @@ def button(kind, label, col, delay):
 # ─────────────────────────────── about: quest log ───────────────────────────────
 
 def about():
-    W, H = 1000, 404
+    W, H = 1000, 370
     cards = [
-        (PEACH, 'briefcase', 'MAIN QUEST', 'IN PROGRESS', ['Funextreme', 'Technology LLC'], 'UI/UX + game dev', .72),
-        (LILAC, 'cap', 'CLEARED', 'COMPLETE', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK', 1),
-        (SAGE, 'pad', 'SIDE QUEST', 'ACTIVE', ['Game design', '& motion'], 'making things feel good', .58),
-        (SKY, 'cube', 'UNLOCKED', 'NEW SKILL', ['3D & AI-powered', 'workflows'], 'Blender, Spline, Claude', .86),
+        (PEACH, 'briefcase', 'MAIN QUEST', 'IN PROGRESS', ['Funextreme', 'Technology LLC'], 'UI/UX + game dev'),
+        (LILAC, 'cap', 'CLEARED', 'COMPLETE', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK'),
+        (SAGE, 'pad', 'SIDE QUEST', 'ACTIVE', ['Game design', '& motion'], 'making things feel good'),
+        (SKY, 'cube', 'UNLOCKED', 'NEW SKILL', ['3D & AI-powered', 'workflows'], 'Blender, Spline, Claude'),
     ]
 
     def object_(kind, col):
@@ -266,17 +266,13 @@ def about():
         return Iso(0, -40).box(0, 0, 0, 34, 34, 34, col)
 
     out = []
-    cw, ch, gap, x0, y0 = 212, 262, 18, 49, 118
-    for i, (col, kind, kicker, status, lines, sub, pct) in enumerate(cards):
+    cw, ch, gap, x0, y0 = 212, 216, 18, 49, 118
+    for i, (col, kind, kicker, status, lines, sub) in enumerate(cards):
         x = x0 + i * (cw + gap)
         text_lines = ''.join(
             f'<text x="20" y="{150 + j * 22}" font-family="{SANS}" font-size="18" font-weight="800" fill="{TEXT}">{esc(t)}</text>'
             for j, t in enumerate(lines))
         sw = 18 + len(status) * 6.9
-        done = pct >= 1
-        bar_w = cw - 40
-        check = (f'<path d="M{cw - 26} {ch - 47} l3 3 l6 -6" fill="none" stroke="{col[1]}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-                 if done else f'<text x="{cw - 20}" y="{ch - 42}" font-family="{MONO}" font-size="11" font-weight="700" fill="{col[1]}" text-anchor="end">{round(pct * 100)}%</text>')
         out.append(f'''<g transform="translate({x} {y0})">
   {raised(0, 0, cw, ch, 24)}
   <rect x="{cw - 16 - sw:.0f}" y="16" width="{sw:.0f}" height="20" rx="10" fill="{col[2]}" fill-opacity=".18" stroke="{col[1]}" stroke-opacity=".5"/>
@@ -286,23 +282,12 @@ def about():
   <text x="20" y="124" font-family="{MONO}" font-size="11.5" letter-spacing="1.2" fill="{col[1]}" font-weight="800">{kicker}</text>
   {text_lines}
   <text x="20" y="{150 + len(lines) * 22 + 4}" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}">{esc(sub)}</text>
-  <text x="20" y="{ch - 42}" font-family="{MONO}" font-size="11" font-weight="700" fill="{TEXT_DIM}">{'CLEARED' if done else 'PROGRESS'}</text>
-  {check}
-  <rect x="20" y="{ch - 32}" width="{bar_w}" height="12" rx="6" fill="{LIP}"/>
-  <clipPath id="bar{i}"><rect x="20" y="{ch - 32}" width="{bar_w * pct:.0f}" height="12" rx="6"/></clipPath>
-  <g clip-path="url(#bar{i})">
-    <rect x="20" y="{ch - 32}" width="{bar_w}" height="12" fill="{col[1]}"/>
-    <rect x="20" y="{ch - 32}" width="{bar_w}" height="5" fill="#fff" opacity=".3"/>
-    <rect class="sheen" style="animation-delay:{i * .6:.1f}s" x="-20" y="{ch - 32}" width="26" height="12" fill="#fff" opacity=".45" transform="skewX(-20)"/>
-  </g>
 </g>''')
 
     style = '''
 .obj { animation: lift 4.5s ease-in-out infinite; }
 .o1 { animation-delay: -1.1s; } .o2 { animation-delay: -2.2s; } .o3 { animation-delay: -3.3s; }
 @keyframes lift { 50% { transform: translate(0, -6px); } }
-.sheen { animation: sheen 3.2s ease-in-out infinite; }
-@keyframes sheen { 0% { transform: skewX(-20deg) translateX(0); } 60%, 100% { transform: skewX(-20deg) translateX(260px); } }
 '''
     body = f'''<defs>{shadow_filter('soft', 10, 12, 0.45)}</defs>
 {panel(W, H, (PEACH[2], .1, 0, .6), 'a')}
