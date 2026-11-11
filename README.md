@@ -1,6 +1,7 @@
 <div align="center">
 
-<!-- The artwork in assets/ is drawn by .github/scripts/draw_assets.py; run it again after changing anything there. -->
+<!-- The artwork in assets/ is drawn by .github/scripts/draw_assets.py; the stats, streak and snake panels are
+     redrawn every 3 hours by .github/workflows/profile-assets.yml (stat_cards.py, frame_snake.py) into the output branch. -->
 
 <img src="assets/hero.svg" width="100%" alt="Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable." />
 
@@ -12,36 +13,39 @@
 <a href="https://www.instagram.com/ruchii_zzz/"><img src="assets/btn-instagram.svg" height="46" alt="Instagram" /></a>
 <a href="mailto:ruchiraedirisinghe0@gmail.com"><img src="assets/btn-email.svg" height="46" alt="Email" /></a>
 
-<br/>
-
 <img src="assets/divider.svg" width="100%" alt="" />
 
-<br/>
-
-<img src="assets/about.svg" width="100%" alt="About me: UI/UX engineer and game developer at Funextreme Technology LLC; BSc (Hons) Computer Security, University of Plymouth, UK; exploring game design, motion, 3D and AI-powered workflows." />
+<img src="assets/about.svg" width="100%" alt="Quest log: UI/UX engineer and game developer at Funextreme Technology LLC; BSc (Hons) Computer Security, University of Plymouth, UK; exploring game design, motion, 3D and AI-powered workflows." />
 
 <br/><br/>
 
 <img src="assets/stack.svg" width="100%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender. Code and games: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python, Unity, C#. AI and workflow: Claude, ChatGPT, Gemini, Cursor, Copilot, Midjourney, Git, GitHub, Vercel." />
 
+<img src="assets/divider.svg" width="100%" alt="" />
+
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-player.svg" width="100%" alt="My GitHub stats" />
+
 <br/><br/>
 
-<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-views.svg" height="58" alt="Profile views" />
-<a href="https://github.com/ruchira-edirisinghe?tab=followers"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-followers.svg" height="58" alt="Followers" /></a>
-<a href="https://github.com/ruchira-edirisinghe?tab=repositories"><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stat-repos.svg" height="58" alt="Public repos" /></a>
-<!-- invisible counter that records profile views; the views card above reads its total -->
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-streak.svg" width="49%" alt="My contribution streak" />&nbsp;<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-languages.svg" width="49%" alt="My top languages" />
+
+<br/><br/>
+
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-activity.svg" width="100%" alt="My contributions per month" />
+
+<br/><br/>
+
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-achievements.svg" width="100%" alt="My GitHub achievements" />
+
+<br/><br/>
+
+<img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/snake.svg" width="100%" alt="A snake eating my contribution graph" />
+
+<br/><br/>
+
+<a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/footer.svg" width="100%" alt="Thanks for playing! Press the button to visit my website." /></a>
+
+<!-- invisible counter that records profile views; the stats panel above reads its total -->
 <img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&style=pixel" alt="" />
-
-<br/><br/>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/github-snake.svg" />
-  <img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/github-snake-dark.svg" width="100%" alt="A snake eating my contribution graph" />
-</picture>
-
-<br/><br/>
-
-<a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/footer.svg" width="100%" alt="Thanks for stopping by! Press the button to visit my website." /></a>
 
 </div>
