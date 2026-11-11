@@ -5,7 +5,7 @@
      Spacing: every block is its own <p> (GitHub gives a bare <img> line no margin but a paragraph 16px), with no
      <br/> spacers, and every image leaves the same clear space (theme.PAD) under itself, so the gaps all match. -->
 
-<p><img src="assets/hero.svg" width="100%" alt="Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable." /></p>
+<p><img src="assets/hero.svg" width="100%" alt="Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I turn ideas into interactive experiences." /></p>
 
 <p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-player.svg" width="100%" alt="My GitHub stats, private repos included" /></p>
 
@@ -15,9 +15,11 @@
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
-<p><img src="assets/about.svg" width="100%" alt="Quest log, as levels: BSc (Hons) Computer Security, University of Plymouth, UK (cleared); UI/UX engineer and game developer at Funextreme Technology LLC (now playing); side quest: game design and motion; unlocked: 3D and AI-powered workflows." /></p>
+<p><img src="assets/about.svg" width="100%" alt="About me: working at Funextreme Technology LLC as a UI/UX engineer and game developer; studied BSc (Hons) Computer Security at the University of Plymouth, UK; exploring game design and motion; also into 3D and AI-powered workflows." /></p>
 
-<p><img src="assets/stack.svg" width="100%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender. Code and games: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python, Unity, C#. AI and workflow: Claude, ChatGPT, Cursor, Copilot, Git, GitHub." /></p>
+<p><img src="assets/divider.svg" width="100%" alt="" /></p>
+
+<p><img src="assets/stack.svg" width="100%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender. Code and games: HTML, CSS, JavaScript, TypeScript, Python, Unity, C#. AI and workflow: Claude, ChatGPT, Cursor, Copilot, Git, GitHub." /></p>
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
@@ -25,7 +27,7 @@
 
 <p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/snake.svg" width="100%" alt="A snake eating my contribution graph" /></p>
 
-<p><a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/footer.svg" width="100%" alt="Thanks for playing! Press the button to visit my website." /></a></p>
+<p><a href="https://ruchiraedirisinghe.vercel.app/"><img src="assets/footer.svg" width="100%" alt="Thanks for playing! Visit my website to see what I am building lately." /></a></p>
 
 <!-- invisible counter that records profile views; the stats above read its total -->
 <img src="https://komarev.com/ghpvc/?username=ruchira-edirisinghe&style=pixel" alt="" />
