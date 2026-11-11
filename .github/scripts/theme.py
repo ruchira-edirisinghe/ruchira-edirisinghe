@@ -116,6 +116,21 @@ def chip_label(text, color, x, y):
             f'<text x="26" y="17.5" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.3" fill="{color[0]}">{esc(text)}</text></g>'), w
 
 
+def header_center(title, kicker, color, cx, y=36, sub='', size=30):
+    """A section title centred on cx: the arcade tag, the title under it, and an optional dim line."""
+    tag_w = 24 + len(kicker) * 8.2
+    out = (f'<g transform="translate({cx - tag_w / 2:.1f} {y})">'
+           f'<rect y="3" width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".35"/>'
+           f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".22"/>'
+           f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
+           f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="1.4" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
+           f'<text x="{cx}" y="{y + 30 + size}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(title)}</text>')
+    if sub:
+        out += (f'<text x="{cx}" y="{y + 54 + size}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" '
+                f'fill="{TEXT_DIM}" text-anchor="middle">{esc(sub)}</text>')
+    return out
+
+
 def shadow_filter(fid, dy=10, blur=12, opacity=0.5, color='#05040a'):
     return (
         f'<filter id="{fid}" x="-30%" y="-30%" width="160%" height="180%">'
