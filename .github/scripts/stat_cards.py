@@ -1,6 +1,6 @@
 """Draws the live GitHub stat cards in the README's dark arcade theme (see
-theme.py): the headline stats (lifetime contributions, commits, PRs and so
-on, private repos included when the token can see them), the contribution
+theme.py): the headline stats (lifetime and this year's contributions, PRs and
+so on, private repos included when the token can see them), the contribution
 streak and top languages. Run by
 .github/workflows/profile-assets.yml, which publishes them to the `output` branch.
 
@@ -53,8 +53,6 @@ USER_QUERY = '''query($login: String!) { user(login: $login) {
 
 YEAR_QUERY = '''query($login: String!, $from: DateTime!, $to: DateTime!) { user(login: $login) {
   contributionsCollection(from: $from, to: $to) {
-    totalCommitContributions
-    restrictedContributionsCount
     contributionCalendar { weeks { contributionDays { date contributionCount } } }
   }
 } }'''
@@ -72,13 +70,10 @@ def profile_views(user):
 
 def collect(login):
     u = gql(USER_QUERY, login=login)['user']
-    days, commits = {}, 0
+    days = {}
     for year in u['contributionsCollection']['contributionYears']:
         c = gql(YEAR_QUERY, login=login, **{'from': f'{year}-01-01T00:00:00Z', 'to': f'{year}-12-31T23:59:59Z'})
         cc = c['user']['contributionsCollection']
-        # Private contributions the token can't open come back as one restricted count; like
-        # github-readme-stats' count_private, add them to the commits.
-        commits += cc['totalCommitContributions'] + cc['restrictedContributionsCount']
         for week in cc['contributionCalendar']['weeks']:
             for d in week['contributionDays']:
                 days[dt.date.fromisoformat(d['date'])] = d['contributionCount']
@@ -117,7 +112,7 @@ def collect(login):
         'joined': dt.date.fromisoformat(u['createdAt'][:10]),
         'today': today,
         'total': sum(days.values()),
-        'commits': commits,
+        'year': sum(n for d, n in days.items() if d.year == today.year),
         'prs': u['pullRequests']['totalCount'],
         'issues': u['issues']['totalCount'],
         'contributed': u['repositoriesContributedTo']['totalCount'],
@@ -187,7 +182,6 @@ def player(s):
     """The headline numbers as loose clay tiles (no panel), to sit right under the hero."""
     W, H = 1000, 214
     tiles = [
-        ('git-commit-horizontal', PEACH, s['commits'], 'Commits'),
         ('git-pull-request', LILAC, s['prs'], 'Pull requests'),
         ('bug', ROSE, s['issues'], 'Issues'),
         ('folder-git-2', SKY, s['contributed'], 'Contributed to'),
@@ -195,6 +189,7 @@ def player(s):
         ('book-marked', PEACH, s['repos'], 'Repositories'),
         ('users', SAGE, s['followers'], 'Followers'),
         ('eye', SKY, s['views'], 'Profile views'),
+        ('calendar-days', PEACH, s['year'], f"{s['today'].year} so far"),
     ]
     tw, th, gap, tx0 = 162, 92, 12, 312
     out = []
@@ -222,7 +217,7 @@ def player(s):
 '''
     body = f'''<defs>{shadow_filter('soft', 6, 6, 0.35)}</defs>
 <g filter="url(#soft)">{big}{''.join(out)}</g>'''
-    label = (f"{s['total']:,} lifetime contributions. Commits {s['commits']:,}, pull requests {s['prs']:,}, issues {s['issues']:,}, "
+    label = (f"{s['total']:,} lifetime contributions, {s['year']:,} this year. Pull requests {s['prs']:,}, issues {s['issues']:,}, "
              f"contributed to {s['contributed']} repos, {s['stars']} stars, {s['repos']} repositories, {s['followers']} followers, {fmt(s['views'])} profile views.")
     return svg(W, H, label, body, style)
 
