@@ -15,7 +15,7 @@ import urllib.request
 from collections import Counter
 
 from theme import (BUTTER, CARD_TOP, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE,
-                   esc, glyph, header, panel, raised, shadow_filter, stars, svg)
+                   esc, glyph, header_center, panel, raised, shadow_filter, stars, svg)
 
 INK = '#2e2a36'
 
@@ -180,9 +180,8 @@ GROW = '''
 
 def player(s):
     """The headline numbers as loose clay tiles (no panel), to sit right under the hero."""
-    # Flush with the panels (x 0..1000). The link tiles follow on the next line of the same
-    # paragraph, so only a little space is left underneath.
-    W, H = 1000, 92 + 12 + 92 + 6 + 6
+    # Flush with the panels (x 0..1000).
+    W, H = 1000, 92 + 12 + 92 + 6 + PAD
     tiles = [
         ('git-pull-request', LILAC, s['prs'], 'Pull requests'),
         ('bug', ROSE, s['issues'], 'Issues'),
@@ -224,62 +223,68 @@ def player(s):
     return svg(W, H, label, body, style)
 
 
+PANEL_H = 330
+
+
 def streak(s):
-    W, H = 494, 290
-    cx = W / 2
+    W, H = 494, PANEL_H
+    cx, cy = W / 2, 208
 
     def column(x, value, label, sub, col):
-        return (f'<text x="{x}" y="196" font-family="{SANS}" font-size="28" font-weight="800" fill="{TEXT}" text-anchor="middle">{value}</text>'
-                f'<text x="{x}" y="222" font-family="{SANS}" font-size="13" font-weight="700" fill="{col}" text-anchor="middle">{label}</text>'
-                f'<text x="{x}" y="242" font-family="{SANS}" font-size="11" fill="{TEXT_DIM}" text-anchor="middle">{esc(sub)}</text>')
+        return (f'<text x="{x}" y="{cy - 4}" font-family="{SANS}" font-size="28" font-weight="800" fill="{TEXT}" text-anchor="middle">{value}</text>'
+                f'<text x="{x}" y="{cy + 22}" font-family="{SANS}" font-size="13" font-weight="700" fill="{col}" text-anchor="middle">{label}</text>'
+                f'<text x="{x}" y="{cy + 42}" font-family="{SANS}" font-size="11" fill="{TEXT_DIM}" text-anchor="middle">{esc(sub)}</text>')
 
-    ring = f'''<g transform="translate({cx} 170)">
+    ring = f'''<g transform="translate({cx} {cy})">
   <circle r="52" fill="{LIP}"/>
   <circle r="46" fill="none" stroke="url(#ringg)" stroke-width="9" class="spin" stroke-dasharray="230 60" stroke-linecap="round"/>
   <circle r="36" fill="{CARD_TOP}"/>
   <text y="12" font-family="{SANS}" font-size="32" font-weight="900" fill="{TEXT}" text-anchor="middle">{s['current']}</text>
-  <g transform="translate(0 -60)" class="flame"><g transform="translate(-17 -24)">
+  <g transform="translate(-17 -84)">
     <path d="M17 2c3 7 13 11 13 23a13 13 0 0 1-26 0c0-6 3-10 6-13 0 5 3 7 5 7-1-6 0-12 2-17Z" fill="{PEACH[2]}"/>
     <path d="M17 14c2 5 7 7 7 13a7 7 0 0 1-14 0c0-3 2-5 3-6 1 3 2 4 3 4 0-4 0-7 1-11Z" fill="{BUTTER[0]}"/>
-  </g></g>
+  </g>
 </g>'''
+    # The ring breathes with a soft warm glow instead of the flame moving.
+    glow = f'<circle class="breathe" cx="{cx}" cy="{cy}" r="62" fill="{PEACH[2]}" filter="url(#warm)"/>'
     body = f'''<defs>{shadow_filter('soft', 8, 8, 0.45)}
+<filter id="warm" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
 <linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BUTTER[1]}"/><stop offset="1" stop-color="{PEACH[2]}"/></linearGradient></defs>
 {panel(W, H, (PEACH[2], .5, .6, .5), 'st')}
 {stars(W, H, 14, 3)}
-{header('streak', 'COMBO', PEACH, '', 36, 34)}
-<text x="{W - 36}" y="50.5" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="end">x{s['current']} COMBO</text>
-{column(78, fmt(s['total']), 'Contributions', f"since {s['joined']:%b} {s['joined'].year}", SKY[1])}
-{column(W - 78, s['longest'], 'Best combo', span(s['longest_range']), LILAC[1])}
+{header_center('streak', 'COMBO', PEACH, cx, 30, 'DAYS IN A ROW', 26)}
+{column(84, fmt(s['total']), 'Contributions', f"since {s['joined']:%b} {s['joined'].year}", SKY[1])}
+{column(W - 84, s['longest'], 'Best combo', span(s['longest_range']), LILAC[1])}
+{glow}
 <g filter="url(#soft)">{ring}</g>
-<text x="{cx}" y="252" font-family="{SANS}" font-size="13" font-weight="700" fill="{PEACH[1]}" text-anchor="middle">Current streak</text>
-<text x="{cx}" y="270" font-family="{SANS}" font-size="11" fill="{TEXT_DIM}" text-anchor="middle">{esc(span(s['current_range']))}</text>'''
+<text x="{cx}" y="{cy + 78}" font-family="{SANS}" font-size="13" font-weight="700" fill="{PEACH[1]}" text-anchor="middle">Current streak</text>
+<text x="{cx}" y="{cy + 96}" font-family="{SANS}" font-size="11" fill="{TEXT_DIM}" text-anchor="middle">{esc(span(s['current_range']))}</text>'''
     style = TWINKLE + '''
-.spin { animation: spin 6s linear infinite; transform-box: fill-box; transform-origin: center; }
+.spin { animation: spin 10s linear infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.flame { animation: flick 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
-@keyframes flick { 50% { transform: scale(1.08, .94) rotate(-3deg); } }
+.breathe { opacity: .18; animation: breathe 3.6s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .5; } }
 '''
     label = f"Contribution streak: {s['current']} days now, best {s['longest']} days, {s['total']:,} contributions in total."
     return body, style, label
 
 
 def languages(s):
-    W, H = 494, 290
+    W, H = 494, PANEL_H
     top = s['langs'][:6]
     total = sum(size for _, size, _ in s['langs']) or 1
     rows = []
+    # 36px clear on both sides: dot and name, bar, percentage, repo count.
     for i, (name, size, color) in enumerate(top):
-        y = 112 + i * 28
+        y = 136 + i * 30
         n = s['repos_per_lang'].get(name, 0)
-        rows.append(f'<circle cx="42" cy="{y + 6}" r="5" fill="{color}"/>'
+        rows.append(f'<circle cx="41" cy="{y + 6}" r="5" fill="{color}"/>'
                     f'<text x="54" y="{y + 11}" font-family="{SANS}" font-size="13.5" font-weight="700" fill="{TEXT}">{esc(name)}</text>'
-                    f'{bar(150, y, 180, 12, size / total, color, "fill", i * .12)}'
-                    f'<text x="384" y="{y + 11}" font-family="{MONO}" font-size="12" font-weight="700" fill="{TEXT_SOFT}" text-anchor="end">{size / total * 100:.1f}%</text>'
-                    + (f'<text x="{W - 36}" y="{y + 11}" font-family="{MONO}" font-size="11" fill="{TEXT_DIM}" text-anchor="end">{n} repo{"s" if n > 1 else ""}</text>' if n else ''))
+                    f'{bar(156, y, 172, 12, size / total, color, "fill", i * .12)}'
+                    f'<text x="390" y="{y + 11}" font-family="{MONO}" font-size="12" font-weight="700" fill="{TEXT_SOFT}" text-anchor="end">{size / total * 100:.1f}%</text>'
+                    f'<text x="{W - 36}" y="{y + 11}" font-family="{MONO}" font-size="11" fill="{TEXT_DIM}" text-anchor="end">{f"{n} repo" + ("s" if n > 1 else "") if n else "·"}</text>')
     body = f'''{panel(W, H, (SKY[2], .9, .1, .6), 'lg')}
-{header('top languages', 'SKILL TREE', SKY, '', 36, 34)}
-<text x="{W - 36}" y="50.5" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="end">BY CODE SIZE</text>
+{header_center('top languages', 'SKILL TREE', SKY, W / 2, 30, 'BY CODE SIZE · PRIVATE REPOS TOO', 26)}
 {''.join(rows)}'''
     label = 'Top languages: ' + ', '.join(f'{n} {sz / total * 100:.0f}%' for n, sz, _ in top)
     return body, GROW, label
@@ -290,7 +295,7 @@ def streak_and_languages(s):
     b1, s1, l1 = streak(s)
     b2, s2, l2 = languages(s)
     body = f'<g>{b1}</g>\n<g transform="translate(506 0)">{b2}</g>'
-    return svg(1000, 290 + PAD, f'{l1} {l2}', body, s1 + s2)
+    return svg(1000, PANEL_H + PAD, f'{l1} {l2}', body, s1 + s2)
 
 
 def main():
