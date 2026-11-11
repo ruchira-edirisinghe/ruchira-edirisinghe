@@ -1,5 +1,5 @@
-"""Render live profile counters (views, followers, repos) as SVG cards that
-match the link buttons in assets/btn-*.svg. Run by .github/workflows/profile-assets.yml.
+"""Render live profile counters (views, followers, repos) as soft clay cards
+that match the artwork in assets/ (drawn by draw_assets.py). Run by .github/workflows/profile-assets.yml.
 
 Usage: python stat_cards.py <github-user> <out-dir>
 """
@@ -10,7 +10,8 @@ import sys
 import urllib.request
 
 USER, OUT = sys.argv[1], sys.argv[2]
-FONT = "'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif"
+FONT = "'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI', Ubuntu, system-ui, sans-serif"
+INK, INK_SOFT = '#2e2a36', '#6f6878'
 
 
 def get(url, headers=None):
@@ -51,13 +52,17 @@ ICONS = {
 
 
 def card(kind, color, value, label):
-    w, h = 226, 72
+    """color is (top, edge) of the card's clay icon."""
+    w, h = 226, 76
+    top, edge = color
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{label}: {value}">
-<rect x="1" y="1" width="{w-2}" height="{h-2}" rx="18" fill="#0d1117" stroke="{color}" stroke-opacity="0.55" stroke-width="1.5"/>
-<rect x="14" y="12" width="48" height="48" rx="14" fill="{color}" fill-opacity="0.18"/>
-<g transform="translate(26 24)" fill="{color}"><path fill-rule="evenodd" d="{ICONS[kind]}"/></g>
-<text x="76" y="36" font-family="{FONT}" font-size="22" font-weight="800" fill="#f0f6fc">{value}</text>
-<text x="76" y="55" font-family="{FONT}" font-size="13" fill="#8b949e">{label}</text>
+<rect x="2" y="7" width="{w-4}" height="{h-10}" rx="20" fill="#e6dccd"/>
+<rect x="2" y="2" width="{w-4}" height="{h-10}" rx="20" fill="#fbf6ef"/>
+<rect x="14" y="16" width="40" height="40" rx="13" fill="{edge}"/>
+<rect x="14" y="12" width="40" height="40" rx="13" fill="{top}"/>
+<g transform="translate(22 20)" fill="{INK}" fill-opacity="0.8"><path fill-rule="evenodd" d="{ICONS[kind]}"/></g>
+<text x="68" y="36" font-family="{FONT}" font-size="22" font-weight="800" fill="{INK}">{value}</text>
+<text x="68" y="54" font-family="{FONT}" font-size="13" fill="{INK_SOFT}">{label}</text>
 </svg>'''
 
 
@@ -73,9 +78,9 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     user = github_user()
     cards = {
-        'views': ('#00b4d8', fmt(safe(profile_views)), 'Profile views'),
-        'followers': ('#a78bfa', fmt(user.get('followers')), 'Followers'),
-        'repos': ('#ff5fd2', fmt(user.get('public_repos')), 'Public repos'),
+        'views': (('#d3e6f7', '#8fb6dc'), fmt(safe(profile_views)), 'Profile views'),
+        'followers': (('#e0d7f7', '#ab9bdd'), fmt(user.get('followers')), 'Followers'),
+        'repos': (('#ffd6c4', '#e89d84'), fmt(user.get('public_repos')), 'Public repos'),
     }
     for kind, (color, value, label) in cards.items():
         with open(os.path.join(OUT, f'stat-{kind}.svg'), 'w', encoding='utf-8') as f:
