@@ -83,12 +83,12 @@ def panel(w, h, glow=None, uid='p'):
 
 def header(title, kicker, color, right='', x=50, y=50):
     """Section title: a small arcade tag, then the title, with optional status text on the right."""
-    tag_w = 24 + len(kicker) * 8.2
+    tag_w = 26 + len(kicker) * 7.4
     out = (f'<g transform="translate({x} {y})">'
            f'<rect y="3" width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".35"/>'
            f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".22"/>'
            f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
-           f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="1.4" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text>'
+           f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text>'
            f'<text y="62" font-family="{SANS}" font-size="30" font-weight="800" fill="{TEXT}">{esc(title)}</text></g>')
     if right:
         out += (f'<text x="{1000 - x}" y="{y + 16.5}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" '
@@ -99,34 +99,47 @@ def header(title, kicker, color, right='', x=50, y=50):
 def plate(title, kicker, color, x=0, y=0):
     """A section title on its own small raised plate, for sections drawn without a panel:
     it stays readable on GitHub's light and dark pages. Returns (svg, width)."""
-    tag_w = 24 + len(kicker) * 8.2
+    tag_w = 26 + len(kicker) * 7.4
     w = round(tag_w + 44 + len(title) * 13.2)
     return (f'<g transform="translate({x} {y})">{raised(0, 0, w, 56, 20)}'
             f'<rect x="14" y="16" width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" fill-opacity=".28" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
-            f'<text x="{14 + tag_w / 2:.0f}" y="32.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="1.4" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text>'
+            f'<text x="{14 + tag_w / 2:.0f}" y="32.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text>'
             f'<text x="{tag_w + 30:.0f}" y="36.5" font-family="{SANS}" font-size="24" font-weight="800" fill="{TEXT}">{esc(title)}</text></g>'), w
+
+
+def header_float(title, kicker, color, cx, y=0, size=30):
+    """header_center for sections with no panel behind them: a solid tag, and the title outlined in
+    the dark lip colour so it reads on GitHub's light page as well as the dark one."""
+    tag_w = 26 + len(kicker) * 7.4
+    return (f'<g transform="translate({cx - tag_w / 2:.1f} {y})">'
+            f'<rect y="3" width="{tag_w:.0f}" height="24" rx="12" fill="{LIP}"/>'
+            f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{CARD}"/>'
+            f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
+            f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
+            f'<text x="{cx}" y="{y + 30 + size}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{TEXT}" text-anchor="middle" '
+            f'stroke="{LIP}" stroke-width="6" stroke-linejoin="round" paint-order="stroke">{esc(title)}</text>')
 
 
 def chip_label(text, color, x, y):
     """A small solid label (a dot and a word) that reads on any background. Returns (svg, width)."""
-    w = round(34 + len(text) * 8.3)
+    w = round(36 + len(text) * 7.4)
     return (f'<g transform="translate({x} {y})"><rect y="3" width="{w}" height="26" rx="13" fill="{LIP}"/>'
             f'<rect width="{w}" height="26" rx="13" fill="{CARD}"/>'
             f'<circle cx="15" cy="13" r="4" fill="{color[1]}"/>'
-            f'<text x="26" y="17.5" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing="1.3" fill="{color[0]}">{esc(text)}</text></g>'), w
+            f'<text x="26" y="17.5" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing=".5" fill="{color[0]}">{esc(text)}</text></g>'), w
 
 
 def header_center(title, kicker, color, cx, y=36, sub='', size=30):
     """A section title centred on cx: the arcade tag, the title under it, and an optional dim line."""
-    tag_w = 24 + len(kicker) * 8.2
+    tag_w = 26 + len(kicker) * 7.4
     out = (f'<g transform="translate({cx - tag_w / 2:.1f} {y})">'
            f'<rect y="3" width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".35"/>'
            f'<rect width="{tag_w:.0f}" height="24" rx="12" fill="{color[2]}" opacity=".22"/>'
            f'<rect x=".75" y=".75" width="{tag_w - 1.5:.0f}" height="22.5" rx="11.25" fill="none" stroke="{color[1]}" stroke-opacity=".55" stroke-width="1.5"/>'
-           f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="1.4" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
+           f'<text x="{tag_w / 2:.0f}" y="16.5" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing=".5" fill="{color[0]}" text-anchor="middle">{esc(kicker)}</text></g>'
            f'<text x="{cx}" y="{y + 30 + size}" font-family="{SANS}" font-size="{size}" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(title)}</text>')
     if sub:
-        out += (f'<text x="{cx}" y="{y + 54 + size}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" '
+        out += (f'<text x="{cx}" y="{y + 54 + size}" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing=".5" '
                 f'fill="{TEXT_DIM}" text-anchor="middle">{esc(sub)}</text>')
     return out
 

@@ -9,8 +9,8 @@ import math
 import os
 
 from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
-                   SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header, header_center, logo, orb, panel,
-                   pixels, plate, raised, shadow_filter, stars, svg)
+                   SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header_center, header_float, logo, orb, panel,
+                   pixels, raised, shadow_filter, stars, svg)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets')
 
@@ -18,7 +18,6 @@ RUNNER_TOP = ['..####..', '.######.', '.#.##.#.', '.######.', 'rr####..', '..###
 RUNNER_A = RUNNER_TOP + ['.##..##.', '##....##']
 RUNNER_B = RUNNER_TOP + ['..####..', '..#..#..']
 BUG = ['.#..#.', '######', '#.##.#', '.#..#.']
-HEART = ['.##.##.', '#######', '#######', '.#####.', '..###..', '...#...']
 
 
 def coin(cx, cy, r, uid):
@@ -120,27 +119,28 @@ def hero():
 
     def chip(x, label, col):
         w = 40 + len(label) * 8.4
-        return (f'<g transform="translate({x} 350)">{raised(0, 0, round(w), 34, 17, CARD, LIP, 4, CARD_TOP)}'
+        return (f'<g transform="translate({x:.0f} 364)">{raised(0, 0, round(w), 34, 17, CARD, LIP, 4, CARD_TOP)}'
                 f'<circle cx="18" cy="17" r="5" fill="{col[1]}"/>'
-                f'<text x="30" y="22.5" font-family="{SANS}" font-size="14" font-weight="700" fill="{col[0]}">{label}</text></g>')
+                f'<text x="30" y="22.5" font-family="{SANS}" font-size="14" font-weight="700" fill="{col[0]}">{label}</text></g>'), w
 
-    hearts = ''.join(f'<g transform="translate({118 + i * 26} 37)">{pixels(HEART, 3, {"#": ROSE[1] if i < 3 else "#3a3452"})}</g>' for i in range(4))
+    chips, cx_ = [], 60
+    for label, col in [('UI/UX Engineer', SKY), ('Game Developer', PEACH), ('Vibe Coder', LILAC)]:
+        c, w = chip(cx_, label, col)
+        chips.append(c)
+        cx_ += w + 10
+
+    # The words sit centred top to bottom: 78px clear above the 1P badge and below the tags.
     hud = f'''<g>
-  <rect x="58" y="34" width="44" height="24" rx="8" fill="{BUTTER[1]}"/>
-  <text x="80" y="51" font-family="{MONO}" font-size="13" font-weight="800" fill="#2e2a36" text-anchor="middle">1P</text>
-  {hearts}
-  <text x="942" y="51" font-family="{MONO}" font-size="12" font-weight="700" letter-spacing="1.4" fill="{TEXT_DIM}" text-anchor="end">STAGE 1-1 · PROFILE</text>
+  <rect x="58" y="78" width="44" height="24" rx="8" fill="{BUTTER[1]}"/>
+  <text x="80" y="95" font-family="{MONO}" font-size="13" font-weight="800" fill="#2e2a36" text-anchor="middle">1P</text>
 </g>'''
 
     words = '\n'.join([
-        f'<text x="62" y="126" font-family="{MONO}" font-size="15" fill="{BUTTER[0]}">&gt; player 1 has joined: hi, i\'m</text>',
-        name('Ruchira', 196),
-        name('Edirisinghe', 266),
-        f'<text x="62" y="318" font-family="{SANS}" font-size="19" font-weight="600" fill="{TEXT_SOFT}">I design interfaces, then make them playable.</text>',
-        chip(60, 'UI/UX engineer', SKY),
-        chip(222, 'game developer', PEACH),
-        chip(384, 'vibe coder', LILAC),
-        f'<text class="press" x="62" y="432" font-family="{MONO}" font-size="14" font-weight="800" letter-spacing="2.5" fill="{TEXT}">▶ PRESS START</text>',
+        f'<text x="62" y="140" font-family="{MONO}" font-size="15" fill="{BUTTER[0]}">&gt; Hello World! I\'m</text>',
+        name('Ruchira', 210),
+        name('Edirisinghe', 280),
+        f'<text x="62" y="332" font-family="{SANS}" font-size="19" font-weight="600" fill="{TEXT_SOFT}">I turn ideas into interactive experiences.</text>',
+        *chips,
     ])
 
     defs = f'''<defs>
@@ -186,8 +186,6 @@ def hero():
 .cloud { animation: drift 14s linear infinite; }
 .cloud.slow { animation-duration: 22s; }
 @keyframes drift { from { transform: translateX(150px); } to { transform: translateX(-160px); } }
-.press { animation: press 1.4s steps(1) infinite; }
-@keyframes press { 60% { opacity: .2; } }
 '''
     body = f'''{defs}
 {panel(W, H, (LILAC[2], .75, .45, .55), 'h')}
@@ -200,17 +198,17 @@ def hero():
 </g>
 {floaters}
 {words}'''
-    return svg(W, H + PAD, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I design interfaces, then make them playable.", body, style)
+    return svg(W, H + PAD, "Ruchira Edirisinghe: UI/UX engineer, game developer and vibe coder. I turn ideas into interactive experiences.", body, style)
 
 
 # ─────────────────────────────── link tiles ───────────────────────────────
 
 LINKS = {
     # kind: (name, kicker, handle, colour)
-    'portfolio': ('Portfolio', 'VISIT', 'see my work', PEACH),
-    'linkedin': ('LinkedIn', 'CONNECT', 'in/ruchiraedirisinghe', SKY),
-    'instagram': ('Instagram', 'FOLLOW', '@ruchii_zzz', ROSE),
-    'email': ('Email', 'SAY HI', 'drop me a line', BUTTER),
+    'portfolio': ('Portfolio', 'Visit', 'See my work', PEACH),
+    'linkedin': ('LinkedIn', 'Connect', 'in/ruchiraedirisinghe', SKY),
+    'instagram': ('Instagram', 'Follow', '@ruchii_zzz', ROSE),
+    'email': ('Email', 'Say Hi', 'Drop me a line', BUTTER),
 }
 
 
@@ -239,7 +237,7 @@ def button(kind, i):
 <g filter="url(#soft)">{raised(x, y, w, h, 18)}</g>
 <g clip-path="url(#tile)"><rect class="shine" x="0" y="0" width="60" height="{H}" fill="url(#g)" transform="skewX(-20)"/></g>
 <g class="pop"><circle cx="{x + 30}" cy="{y + 30}" r="19" fill="{col[1]}"/><circle cx="{x + 30}" cy="{y + 27}" r="19" fill="{col[0]}"/>{icon}</g>
-<text x="{x + 60}" y="{y + 31}" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing="1.3" fill="{col[1]}">{kicker}</text>
+<text x="{x + 60}" y="{y + 31}" font-family="{MONO}" font-size="11.5" font-weight="800" letter-spacing=".5" fill="{col[1]}">{kicker}</text>
 <g transform="translate({x + w - 30} {y + 27})"><circle r="13" fill="{CARD_TOP}"/>
 <g class="go"><path d="M-4 4 L4 -4 M-2.5 -4 H4 V2.5" fill="none" stroke="{col[1]}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
 <text x="{x + 18}" y="{y + 78}" font-family="{SANS}" font-size="21" font-weight="800" fill="{TEXT}">{name}</text>
@@ -250,16 +248,15 @@ def button(kind, i):
 # ─────────────────────────────── about: quest log ───────────────────────────────
 
 def about():
-    """The about section as a level-select map: four platforms joined by a path, in the order they
-    happened, with a marker on the one being played now. Everything is centred on its platform."""
-    W, H = 1000, 424
-    levels = [
-        (LILAC, 'cap', 'LEVEL 1 · CLEARED', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK'),
-        (PEACH, 'briefcase', 'LEVEL 2 · NOW PLAYING', ['Funextreme', 'Technology LLC'], 'UI/UX + game dev'),
-        (SAGE, 'pad', 'SIDE QUEST', ['Game design', '& motion'], 'making things feel good'),
-        (SKY, 'cube', 'UNLOCKED', ['3D & AI-powered', 'workflows'], 'Blender, Spline, Claude'),
+    """About me as four separate facts, each on its own pedestal: where I work, what I studied,
+    what I'm exploring and what else I'm into. No path or levels, so nothing reads as a sequence."""
+    W, H = 1000, 396
+    facts = [
+        (PEACH, 'briefcase', 'Working At', ['Funextreme', 'Technology LLC'], 'UI/UX Engineer & Game Developer'),
+        (LILAC, 'cap', 'Studied', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK'),
+        (SAGE, 'pad', 'Exploring', ['Game Design', '& Motion'], 'Making things feel good'),
+        (SKY, 'cube', 'Also Into', ['3D & AI-Powered', 'Workflows'], 'Blender, Spline, Claude'),
     ]
-    current = 1
 
     def object_(kind, col):
         if kind == 'briefcase':
@@ -280,71 +277,50 @@ def about():
                     f'<circle cx="18" cy="-4" r="4" fill="#f08aa0"/><circle cx="26" cy="4" r="4" fill="#8fb6dc"/>')
         return Iso(0, 4).box(-17, -17, 0, 34, 34, 34, col)
 
-    step = W / len(levels)
-    xs = [step * (i + .5) for i in range(len(levels))]
-    py = 262  # centre of each platform's top
-
-    # The path runs behind the platforms; the stretch already walked is solid.
-    path = []
-    for i in range(len(levels) - 1):
-        a, b = xs[i] + 60, xs[i + 1] - 60
-        if i < current:
-            path.append(f'<path d="M{a:.0f} {py + 8} H{b:.0f}" stroke="{levels[i + 1][0][1]}" stroke-width="5" stroke-linecap="round"/>')
-        else:
-            path.append(f'<path class="march" d="M{a:.0f} {py + 8} H{b:.0f}" stroke="{EDGE}" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12"/>')
+    step = W / len(facts)
+    xs = [step * (i + .5) for i in range(len(facts))]
+    py = 226  # centre of each pedestal's top
 
     nodes = []
-    for i, (col, kind, status, lines, sub) in enumerate(levels):
+    for i, (col, kind, tag, lines, sub) in enumerate(facts):
         cx = xs[i]
-        sw = 22 + len(status) * 6.9
-        platform = (f'<ellipse cx="{cx:.0f}" cy="{py + 16}" rx="64" ry="22" fill="{col[2]}"/>'
+        sw = 26 + len(tag) * 7.4
+        pedestal = (f'<ellipse cx="{cx:.0f}" cy="{py + 16}" rx="64" ry="22" fill="{col[2]}"/>'
                     f'<rect x="{cx - 64:.0f}" y="{py}" width="128" height="16" fill="{col[2]}"/>'
                     f'<ellipse cx="{cx:.0f}" cy="{py}" rx="64" ry="22" fill="{col[1]}"/>'
                     f'<ellipse cx="{cx:.0f}" cy="{py - 2}" rx="54" ry="16" fill="{col[0]}"/>'
                     f'<ellipse cx="{cx:.0f}" cy="{py}" rx="26" ry="6" fill="#000" opacity=".22"/>')
-        text = ''.join(f'<text x="{cx:.0f}" y="{344 + j * 22}" font-family="{SANS}" font-size="18" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(t)}</text>'
+        text = ''.join(f'<text x="{cx:.0f}" y="{310 + j * 22}" font-family="{SANS}" font-size="18" font-weight="800" fill="{TEXT}" text-anchor="middle">{esc(t)}</text>'
                        for j, t in enumerate(lines))
         nodes.append(f'''<g>
-  {platform}
+  {pedestal}
   <g transform="translate({cx:.0f} {py - 44})"><g class="obj o{i}">{object_(kind, col)}</g></g>
-  <rect x="{cx - sw / 2:.0f}" y="300" width="{sw:.0f}" height="22" rx="11" fill="{col[2]}" fill-opacity=".2" stroke="{col[1]}" stroke-opacity=".55"/>
-  <text x="{cx:.0f}" y="314.5" font-family="{MONO}" font-size="10" font-weight="800" letter-spacing=".8" fill="{col[0]}" text-anchor="middle">{status}</text>
+  <rect x="{cx - sw / 2:.0f}" y="266" width="{sw:.0f}" height="22" rx="11" fill="{col[2]}" fill-opacity=".2" stroke="{col[1]}" stroke-opacity=".55"/>
+  <text x="{cx:.0f}" y="281" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{col[0]}" text-anchor="middle">{tag}</text>
   {text}
-  <text x="{cx:.0f}" y="{344 + len(lines) * 22 + 2}" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}" text-anchor="middle">{esc(sub)}</text>
+  <text x="{cx:.0f}" y="{310 + len(lines) * 22 + 2}" font-family="{SANS}" font-size="13" fill="{TEXT_SOFT}" text-anchor="middle">{esc(sub)}</text>
 </g>''')
-
-    mx = xs[current]
-    marker = (f'<g transform="translate({mx:.0f} 156)"><g class="here">'
-              f'<rect x="-52" y="-14" width="104" height="24" rx="12" fill="{PEACH[1]}"/>'
-              f'<text y="2.5" font-family="{MONO}" font-size="10.5" font-weight="800" letter-spacing="1" fill="#2e2a36" text-anchor="middle">YOU ARE HERE</text>'
-              f'<path d="M-6 10 L0 17 L6 10 Z" fill="{PEACH[1]}"/></g></g>')
 
     style = '''
 .obj { animation: lift 4.5s ease-in-out infinite; }
 .o1 { animation-delay: -1.1s; } .o2 { animation-delay: -2.2s; } .o3 { animation-delay: -3.3s; }
 @keyframes lift { 50% { transform: translate(0, -6px); } }
-.here { animation: here 1.6s ease-in-out infinite; }
-@keyframes here { 50% { transform: translateY(-5px); } }
-.march { animation: march 1.2s linear infinite; }
-@keyframes march { to { stroke-dashoffset: -14; } }
 '''
     body = f'''<defs>{shadow_filter('soft', 10, 12, 0.45)}</defs>
 {panel(W, H, (PEACH[2], .5, 0, .6), 'a')}
-{header_center('a little about me', 'QUEST LOG', PEACH, W / 2, 36, '4 LEVELS · 1 CLEARED')}
-{''.join(path)}
-<g filter="url(#soft)">{''.join(nodes)}</g>
-{marker}'''
-    return svg(W, H + PAD, 'About me, as levels: 1. BSc (Hons) Computer Security, University of Plymouth, UK (cleared). 2. UI/UX engineer and game developer at Funextreme Technology LLC (now). Side quest: game design and motion. Unlocked: 3D and AI-powered workflows.', body, style)
+{header_center('A Little About Me', 'Player Profile', PEACH, W / 2, 36)}
+<g filter="url(#soft)">{''.join(nodes)}</g>'''
+    return svg(W, H + PAD, 'About me. Working at Funextreme Technology LLC as a UI/UX engineer and game developer. Studied BSc (Hons) Computer Security at the University of Plymouth, UK. Exploring game design and motion. Also into 3D and AI-powered workflows (Blender, Spline, Claude).', body, style)
 
 
 # ─────────────────────────────── stack: inventory ───────────────────────────────
 
 GROUPS = [
-    ('DESIGN & 3D', PEACH, [('Figma', 'figma'), ('Framer', 'framer'), ('Spline', 'spline'), ('Photoshop', 'photoshop'),
+    ('Design & 3D', PEACH, [('Figma', 'figma'), ('Framer', 'framer'), ('Spline', 'spline'), ('Photoshop', 'photoshop'),
                             ('Illustrator', 'illustrator'), ('Blender', 'blender')]),
-    ('CODE & GAMES', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
-                           ('React', 'react'), ('Tailwind', 'tailwind'), ('Python', 'python'), ('Unity', 'unity'), ('C#', 'csharp')]),
-    ('AI & WORKFLOW', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Cursor', 'cursor'), ('Copilot', 'copilot'),
+    ('Code & Games', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
+                           ('Python', 'python'), ('Unity', 'unity'), ('C#', 'csharp')]),
+    ('AI & Workflow', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Cursor', 'cursor'), ('Copilot', 'copilot'),
                               ('Git', 'git'), ('GitHub', 'github')]),
 ]
 
@@ -353,9 +329,8 @@ def stack():
     """The toolbox as loose inventory slots (no panel). Each group fills the full width, so the
     shorter groups get wider slots."""
     W, gap, sh = 1000, 14, 100
-    title, tw = plate('my toolbox', 'INVENTORY', SKY)
-    title = f'<g transform="translate({(W - tw) / 2:.0f} 0)">{title}</g>'
-    out, y, n = [], 84, 0
+    title = header_float('My Toolbox', 'Inventory', SKY, W / 2, 0)
+    out, y, n = [], 102, 0
     for name_, col, tools in GROUPS:
         _, cw = chip_label(name_, col, 0, 0)
         chip, _ = chip_label(name_, col, round((W - cw) / 2), y)
@@ -449,13 +424,13 @@ def footer():
 {halo}
 <g class="spark">{sparks}</g>
 <g filter="url(#soft)">{base_l}{button_}{base_r}{stick}</g>
-<text x="{cx}" y="62" font-family="{MONO}" font-size="13" font-weight="800" letter-spacing="2" fill="{ROSE[1]}" text-anchor="middle">GAME OVER? NOT YET.</text>
-<text x="{cx}" y="110" font-family="{SANS}" font-size="36" font-weight="800" fill="{TEXT}" text-anchor="middle">thanks for playing!</text>
-<text x="{cont_x:.0f}" y="152" font-family="{MONO}" font-size="20" font-weight="800" fill="{BUTTER[0]}">CONTINUE?</text>{digits}
-<text x="{cx}" y="188" font-family="{SANS}" font-size="16" font-weight="600" fill="{TEXT_SOFT}" text-anchor="middle">press start to see what i'm building lately</text>
+<text x="{cx}" y="62" font-family="{MONO}" font-size="13" font-weight="800" letter-spacing=".5" fill="{ROSE[1]}" text-anchor="middle">Game Over? Not Yet.</text>
+<text x="{cx}" y="110" font-family="{SANS}" font-size="36" font-weight="800" fill="{TEXT}" text-anchor="middle">Thanks For Playing!</text>
+<text x="{cont_x:.0f}" y="152" font-family="{MONO}" font-size="20" font-weight="800" fill="{BUTTER[0]}">Continue?</text>{digits}
+<text x="{cx}" y="188" font-family="{SANS}" font-size="16" font-weight="600" fill="{TEXT_SOFT}" text-anchor="middle">Visit my site to see what I'm building lately</text>
 <text x="{cx}" y="220" font-family="{MONO}" font-size="14" fill="{PEACH[1]}" text-anchor="middle">ruchiraedirisinghe.vercel.app<tspan class="caret" fill="{TEXT}">_</tspan></text>
-<text class="coin" x="{bx:.0f}" y="236" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing="2" fill="{BUTTER[1]}" text-anchor="middle">INSERT COIN</text>
-<text x="{jx:.0f}" y="236" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing="2" fill="{TEXT_DIM}" text-anchor="middle">PLAYER 2?</text>'''
+<text class="coin" x="{bx:.0f}" y="236" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{BUTTER[1]}" text-anchor="middle">Insert Coin</text>
+<text x="{jx:.0f}" y="236" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{TEXT_DIM}" text-anchor="middle">Player 2?</text>'''
     return svg(W, H + PAD, "Thanks for playing! Visit my website to see what I'm building lately.", body, style)
 
 
