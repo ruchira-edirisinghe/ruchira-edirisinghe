@@ -22,7 +22,9 @@ jobs:
 
       - name: Generate stat cards
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional STATS_TOKEN (a personal token with read:user) also counts PRs and issues
+          # in private and organisation repos; the default token only sees public ones.
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
         run: python3 .github/scripts/stat_cards.py "${{ github.repository_owner }}" dist
 
       - name: Generate snake SVG
