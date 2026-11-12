@@ -19,11 +19,13 @@
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
-<p><img src="assets/stack.svg" width="100%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender, Behance. Web and code: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python. AI tools: Claude, ChatGPT, Gemini, Copilot, Cursor, Midjourney, Tripo AI. Games and workflow: Unity, C#, Git, GitHub, Vercel, ClickUp, Warp." /></p>
+<p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-streak-languages.svg" width="100%" alt="My contribution streak and top languages" /></p>
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
-<p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-streak-languages.svg" width="100%" alt="My contribution streak and top languages" /></p>
+<p><img src="assets/stack.svg" width="100%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender, Behance. Web and code: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python. AI tools: Claude, ChatGPT, Gemini, Copilot, Cursor, Midjourney, Tripo AI. Games and workflow: Unity, C#, Git, GitHub, Vercel, ClickUp, Warp." /></p>
+
+<p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
 <p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/snake.svg" width="100%" alt="A snake eating my contribution graph" /></p>
 
