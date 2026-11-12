@@ -266,7 +266,7 @@ def pixels(rows, size, colors, x0=0, y0=0):
 # ───────────────────────────── logos & glyphs ─────────────────────────────
 
 # Logos drawn in black or near-black, which would vanish on the dark theme.
-DARK_LOGOS = {'framer', 'vercel', 'chatgpt', 'copilot', 'github', 'unity', 'midjourney', 'cursor'}
+DARK_LOGOS = {'framer', 'vercel', 'chatgpt', 'copilot', 'github', 'unity', 'midjourney', 'cursor', 'warp', 'tripo', 'behance'}
 DARK_FILLS = re.compile(r'fill="#(?:000|000000|161614|222c37|1a222d|26251e)"', re.I)
 _uid = [0]
 

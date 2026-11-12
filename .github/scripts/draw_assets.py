@@ -311,18 +311,22 @@ def about():
 
 GROUPS = [
     ('Design & 3D', PEACH, [('Figma', 'figma'), ('Framer', 'framer'), ('Spline', 'spline'), ('Photoshop', 'photoshop'),
-                            ('Illustrator', 'illustrator'), ('Blender', 'blender')]),
-    ('Code & Games', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
-                           ('Python', 'python'), ('Unity', 'unity'), ('C#', 'csharp')]),
-    ('AI & Workflow', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Cursor', 'cursor'), ('Copilot', 'copilot'),
-                              ('Git', 'git'), ('GitHub', 'github')]),
+                            ('Illustrator', 'illustrator'), ('Blender', 'blender'), ('Behance', 'behance')]),
+    ('Web & Code', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
+                         ('React', 'react'), ('Tailwind', 'tailwind'), ('Python', 'python')]),
+    ('AI Tools', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Gemini', 'gemini'), ('Copilot', 'copilot'),
+                         ('Cursor', 'cursor'), ('Midjourney', 'midjourney'), ('Tripo AI', 'tripo')]),
+    ('Games & Workflow', SAGE, [('Unity', 'unity'), ('C#', 'csharp'), ('Git', 'git'), ('GitHub', 'github'),
+                                ('Vercel', 'vercel'), ('ClickUp', 'clickup'), ('Warp', 'warp')]),
 ]
+PER_ROW = 7
 
 
 def stack():
-    """The toolbox as loose inventory slots (no panel). Each group fills the full width, so the
-    shorter groups get wider slots."""
+    """The toolbox as loose inventory slots (no panel), PER_ROW to a row; a group with more
+    tools than that wraps onto another row."""
     W, gap, sh = 1000, 14, 100
+    sw = (W - (PER_ROW - 1) * gap) / PER_ROW
     title = header_float('My Toolbox', 'Inventory', SKY, W / 2, 0)
     out, y, n = [], 102, 0
     for name_, col, tools in GROUPS:
@@ -331,10 +335,13 @@ def stack():
         rule = f'stroke="{EDGE}" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"'
         out.append(chip + f'<path d="M0 {y + 14} H{(W - cw) / 2 - 14:.0f} M{(W + cw) / 2 + 14:.0f} {y + 14} H{W}" {rule}/>')
         y += 44
-        k = len(tools)
-        sw = (W - (k - 1) * gap) / k
         for i, (name, key) in enumerate(tools):
-            x = i * (sw + gap)
+            if i and i % PER_ROW == 0:
+                y += sh + 6 + gap
+            # A short last row sits centred.
+            left = len(tools) - i + i % PER_ROW
+            row_n = min(PER_ROW, left)
+            x = (W - (row_n * sw + (row_n - 1) * gap)) / 2 + (i % PER_ROW) * (sw + gap)
             out.append(f'''<g transform="translate({x:.1f} {y})">
   {raised(0, 0, round(sw, 1), sh, 18)}
   <rect x="8" y="8" width="{sw - 16:.1f}" height="60" rx="13" fill="{SLOT}"/>
