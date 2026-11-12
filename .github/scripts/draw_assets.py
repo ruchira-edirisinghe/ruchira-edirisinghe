@@ -7,12 +7,14 @@ Usage: python .github/scripts/draw_assets.py
 """
 import math
 import os
+import re
 
 from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, NARROW, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
                    SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header_center, header_float, logo, orb, panel,
                    pixels, raised, shadow_filter, stars, svg, title)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets')
+PROJECT_ICONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icons', 'projects')
 
 RUNNER_TOP = ['..####..', '.######.', '.#.##.#.', '.######.', 'rr####..', '..####..', '.######.', '..####..']
 RUNNER_A = RUNNER_TOP + ['.##..##.', '##....##']
@@ -244,23 +246,33 @@ def button(kind, i):
 
 # ─────────────────────────────── about: quest log ───────────────────────────────
 
+def catalogie_mark(color):
+    """Catalogie's mark (icons/projects/catalogie.svg, drawn white) in one colour, in its own 419×428 units."""
+    with open(os.path.join(PROJECT_ICONS, 'catalogie.svg'), encoding='utf-8') as f:
+        src = f.read()
+    inner = re.sub(r'^.*?<svg[^>]*>|</svg>\s*$', '', src, flags=re.S)
+    return inner.replace('"white"', f'"{color}"')
+
+
 def about():
-    """About me as four separate facts, each a floating clay object: where I work, what I studied,
-    what I'm exploring and what else I'm into. No path or levels, so nothing reads as a sequence."""
+    """About me as four separate facts, each a floating clay object: what I'm working on, what I
+    studied, what I'm exploring and what else I'm into. No path or levels, so nothing reads as a sequence."""
     W, H = 1000, 376
     facts = [
-        (PEACH, 'briefcase', 'Working At', ['Funextreme', 'Technology LLC'], 'UI/UX Engineer & Game Developer'),
+        (PEACH, 'catalogie', 'Working On', ['Catalogie', 'Media Tracker'], 'Every hour, accounted for'),
         (LILAC, 'cap', 'Studied', ['BSc (Hons)', 'Computer Security'], 'University of Plymouth, UK'),
         (SAGE, 'pad', 'Exploring', ['Game Design', '& Motion'], 'Making things feel good'),
         (SKY, 'cube', 'Also Into', ['3D & AI-Powered', 'Workflows'], 'Blender, Spline, Claude'),
     ]
 
     def object_(kind, col):
-        if kind == 'briefcase':
-            return (f'<path d="M-12 -24 v-6 a5 5 0 0 1 5 -5 h14 a5 5 0 0 1 5 5 v6" fill="none" stroke="{col[2]}" stroke-width="5"/>'
-                    f'<rect x="-30" y="-20" width="60" height="42" rx="10" fill="{col[2]}"/>'
-                    f'<rect x="-30" y="-26" width="60" height="42" rx="10" fill="{col[0]}"/>'
-                    f'<rect x="-6" y="-10" width="12" height="9" rx="3" fill="{col[1]}"/>')
+        if kind == 'catalogie':
+            # Catalogie's mark pressed into a clay app tile, the tile's darker underside giving it depth.
+            k = .105
+            place = f'translate({-419 * k / 2:.1f} {-428 * k / 2 - 4:.1f}) scale({k})'
+            return (f'<rect x="-32" y="-26" width="64" height="58" rx="16" fill="{col[2]}"/>'
+                    f'<rect x="-32" y="-32" width="64" height="58" rx="16" fill="{col[0]}"/>'
+                    f'<g transform="{place}">{catalogie_mark("#2e2a36")}</g>')
         if kind == 'cap':
             return (f'<path d="M-18 -6 v12 c0 7 36 7 36 0 v-12" fill="{col[1]}"/>'
                     f'<path d="M0 -30 L36 -14 L0 2 L-36 -14 Z" fill="{col[2]}" transform="translate(0 4)"/>'
@@ -305,7 +317,7 @@ def about():
 {panel(W, H, (PEACH[2], .5, 0, .6), 'a')}
 {header_center('A Little About Me', 'Player Profile', PEACH, W / 2, 36)}
 <g filter="url(#soft)">{''.join(nodes)}</g>'''
-    return svg(W, H + PAD, 'About me. Working at Funextreme Technology LLC as a UI/UX engineer and game developer. Studied BSc (Hons) Computer Security at the University of Plymouth, UK. Exploring game design and motion. Also into 3D and AI-powered workflows (Blender, Spline, Claude).', body, style)
+    return svg(W, H + PAD, 'About me. Working on Catalogie, a media tracker: every hour, accounted for. Studied BSc (Hons) Computer Security at the University of Plymouth, UK. Exploring game design and motion. Also into 3D and AI-powered workflows (Blender, Spline, Claude).', body, style)
 
 
 # ─────────────────────────────── stack: inventory ───────────────────────────────

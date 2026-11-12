@@ -17,7 +17,7 @@
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
-<p><img src="assets/about.svg" width="88%" alt="About me: working at Funextreme Technology LLC as a UI/UX engineer and game developer; studied BSc (Hons) Computer Security at the University of Plymouth, UK; exploring game design and motion; also into 3D and AI-powered workflows." /></p>
+<p><img src="assets/about.svg" width="88%" alt="About me: working on Catalogie, a media tracker; studied BSc (Hons) Computer Security at the University of Plymouth, UK; exploring game design and motion; also into 3D and AI-powered workflows." /></p>
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
