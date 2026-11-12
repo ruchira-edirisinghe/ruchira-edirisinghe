@@ -237,7 +237,7 @@ def streak(s):
 
     ring = f'''<g transform="translate({cx} {cy})">
   <circle r="52" fill="{LIP}"/>
-  <circle r="46" fill="none" stroke="url(#ringg)" stroke-width="9" class="spin" stroke-dasharray="230 60" stroke-linecap="round"/>
+  <circle r="46" fill="none" stroke="url(#ringg)" stroke-width="9" stroke-dasharray="230 60" stroke-linecap="round" transform="rotate(-53)"/>
   <circle r="36" fill="{CARD_TOP}"/>
   <text y="12" font-family="{SANS}" font-size="32" font-weight="900" fill="{TEXT}" text-anchor="middle">{s['current']}</text>
   <g transform="translate(-17 -84)">
@@ -245,7 +245,7 @@ def streak(s):
     <path d="M17 14c2 5 7 7 7 13a7 7 0 0 1-14 0c0-3 2-5 3-6 1 3 2 4 3 4 0-4 0-7 1-11Z" fill="{BUTTER[0]}"/>
   </g>
 </g>'''
-    # The ring breathes with a soft warm glow instead of the flame moving.
+    # The ring holds still, its gap turned to the top under the flame; only a soft warm glow breathes behind it.
     glow = f'<circle class="breathe" cx="{cx}" cy="{cy}" r="62" fill="{PEACH[2]}" filter="url(#warm)"/>'
     body = f'''<defs>{shadow_filter('soft', 8, 8, 0.45)}
 <filter id="warm" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
@@ -260,8 +260,6 @@ def streak(s):
 <text x="{cx}" y="{cy + 78}" font-family="{SANS}" font-size="13" font-weight="700" fill="{PEACH[1]}" text-anchor="middle">Current streak</text>
 <text x="{cx}" y="{cy + 96}" font-family="{SANS}" font-size="11" fill="{TEXT_DIM}" text-anchor="middle">{esc(span(s['current_range']))}</text>'''
     style = TWINKLE + '''
-.spin { animation: spin 10s linear infinite; transform-box: fill-box; transform-origin: center; }
-@keyframes spin { to { transform: rotate(360deg); } }
 .breathe { opacity: .18; animation: breathe 3.6s ease-in-out infinite; }
 @keyframes breathe { 50% { opacity: .5; } }
 '''
