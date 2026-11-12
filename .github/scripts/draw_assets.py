@@ -8,7 +8,7 @@ Usage: python .github/scripts/draw_assets.py
 import math
 import os
 
-from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
+from theme import (BUTTER, CARD, CARD_TOP, EDGE, LILAC, LIP, MONO, NARROW, PAD, PEACH, ROSE, SAGE, SANS, SKY, SLATE, SLATE_LIGHT,
                    SLOT, TEXT, TEXT_DIM, TEXT_SOFT, TWINKLE, Iso, chip_label, esc, glyph, header_center, header_float, logo, orb, panel,
                    pixels, raised, shadow_filter, stars, svg, title)
 
@@ -210,7 +210,8 @@ LINKS = {
 
 def button(kind, i):
     """A link as a clay tile that matches the stat tiles above it. The README puts the four side by
-    side, each 25% wide; tile i sits i*3px in, so the tiles fill the row edge to edge with 12px gaps."""
+    side, each a quarter of NARROW wide (22%); tile i sits i*3px in, so the tiles fill the row edge
+    to edge with 12px gaps, at the same scale as everything else."""
     name, kicker, handle, col = LINKS[kind]
     delay = i * 0.4
     W, H = 250, 108 + 6 + PAD
@@ -370,9 +371,13 @@ def stack():
 # ─────────────────────────────── divider & footer ───────────────────────────────
 
 def divider():
-    """A plain dotted rule, centred between the blocks around it (the block above leaves PAD under itself)."""
-    W, H = 1000, 10 + 10 + PAD
-    body = f'<path d="M60 10 H940" stroke="{LILAC[2]}" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>'
+    """A plain dotted rule as wide as the blocks around it (they're shown at NARROW of the README's
+    width), centred between them: the block above leaves PAD under itself, which shrinks with it."""
+    W = 1000
+    pad = round(PAD * NARROW)
+    H = 10 + 10 + pad
+    x0 = W * (1 - NARROW) / 2
+    body = f'<path d="M{x0:g} 10 H{W - x0:g}" stroke="{LILAC[2]}" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>'
     return svg(W, H, '', body)
 
 

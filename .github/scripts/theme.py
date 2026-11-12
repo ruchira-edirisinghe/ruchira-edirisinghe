@@ -48,6 +48,10 @@ C30, S30 = math.cos(math.pi / 6), 0.5
 # between blocks in the README come out the same everywhere.
 PAD = 14
 
+# The README shows every block at this share of its width (the four link tiles at a quarter of it
+# each), so the blocks span exactly the dividers' dotted line; the dividers stay at full width.
+NARROW = 0.88
+
 REDUCED = '@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }'
 
 
