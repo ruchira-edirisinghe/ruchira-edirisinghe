@@ -5,6 +5,7 @@ GitHub stat cards are drawn by stat_cards.py in the same style.
 
 Usage: python .github/scripts/draw_assets.py
 """
+import base64
 import math
 import os
 import re
@@ -320,6 +321,103 @@ def about():
     return svg(W, H + PAD, 'About me. Working on Catalogie, a media tracker: every hour, accounted for. Studied BSc (Hons) Computer Security at the University of Plymouth, UK. Exploring game design and motion. Also into 3D and AI-powered workflows (Blender, Spline, Claude).', body, style)
 
 
+# ─────────────────────────────── featured projects ───────────────────────────────
+
+PROJECTS = [
+    # icon, name, (status, colour), kind, description (two lines), tech
+    ('catalogie', 'Catalogie', ('Working On', PEACH), 'Web App · catalogie.com',
+     ['Every hour, accounted for. Track what you watch and play:', 'movies, series, games and books in one timeline.'],
+     ['React', 'Node.js', 'TypeScript', 'PostgreSQL']),
+    ('rupeeradar', 'RupeeRadar', ('Built By Me', SAGE), 'Android App · P2P Rate Widget',
+     ['The real Binance P2P USDT/LKR rate on your home screen,', 'with trend charts, rate alerts and a currency converter.'],
+     ['Kotlin', 'Jetpack Compose', 'Glance']),
+    ('telegram-mcp', 'Telegram MCP', ('Contributor', SKY), 'MCP Server · iddhi-sulakshana',
+     ['Lets Claude use your Telegram through one always-on', 'daemon, shared by every session. Sends only what you allow.'],
+     ['TypeScript', 'Bun', 'MCP']),
+    ('kv', 'LLM Key Vault', ('Contributor', LILAC), 'MCP Server · DFanso',
+     ['A local secrets broker for AI agents: they use your API', 'keys and database logins without ever seeing them.'],
+     ['Rust', 'MCP', 'Postgres', 'Redis']),
+]
+
+
+def app_icon(key, s):
+    """A project's own icon (icons/projects/) as a raised app tile, s×s at the origin."""
+    r = round(s * .26, 1)
+    tile = f'<rect width="{s}" height="{s}" rx="{r}"'
+    out = f'<rect y="5" width="{s}" height="{s}" rx="{r}" fill="{LIP}"/><clipPath id="ic-{key}">{tile}/></clipPath><g clip-path="url(#ic-{key})">'
+    if key == 'catalogie':
+        k = s * .62 / 428
+        out += (f'{tile} fill="#000313"/>'
+                f'<g transform="translate({(s - 419 * k) / 2:.1f} {(s - 428 * k) / 2:.1f}) scale({k:.4f})">{catalogie_mark("#fff")}</g>')
+    elif key == 'rupeeradar':
+        with open(os.path.join(PROJECT_ICONS, 'rupeeradar.png'), 'rb') as f:
+            data = base64.b64encode(f.read()).decode()
+        out += f'<image width="{s}" height="{s}" href="data:image/png;base64,{data}"/>'
+    elif key == 'telegram-mcp':
+        with open(os.path.join(PROJECT_ICONS, 'telegram-mcp.svg'), encoding='utf-8') as f:
+            plane = re.search(r'<path [^>]*/>', f.read()).group(0).replace('#1B92D1', '#fff')
+        out += (f'<linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#41b4e6"/><stop offset="1" stop-color="#1b92d1"/></linearGradient>'
+                f'{tile} fill="url(#tg)"/><svg x="{s * .2:.1f}" y="{s * .22:.1f}" width="{s * .58:.1f}" height="{s * .58:.1f}" viewBox="0 0 100 100">{plane}</svg>')
+    else:
+        with open(os.path.join(PROJECT_ICONS, f'{key}.svg'), encoding='utf-8') as f:
+            inner = re.sub(r'^.*?<svg[^>]*>|</svg>\s*$', '', f.read(), flags=re.S)
+        inner = re.sub(r'<!--.*?-->', '', inner, flags=re.S).replace('id="tile"', 'id="kvtile"').replace('url(#tile)', 'url(#kvtile)')
+        out += f'<svg width="{s}" height="{s}" viewBox="2 2 60 60">{inner}</svg>'
+    # A soft gloss and rim so every icon reads as the same clay tile.
+    out += (f'</g><rect width="{s}" height="{s / 2:.0f}" rx="{r}" fill="#fff" opacity=".07"/>'
+            f'<rect x=".75" y=".75" width="{s - 1.5}" height="{s - 1.5}" rx="{r - .75}" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="1.5"/>')
+    return out
+
+
+def projects_title():
+    """The Featured Projects heading on its own, so each project card below it can be a link."""
+    W, H = 1000, 66 + PAD
+    return svg(W, H, 'Featured projects', header_float('Featured Projects', 'Quest Log', BUTTER, W / 2, 0))
+
+
+def project_card(i):
+    """One featured project as a clay card. The README shows two side by side, each half of NARROW
+    wide; card i%2 sits 6px in, so a pair fills the row edge to edge with a 12px gap."""
+    key, name, (status, col), kind, desc, tech = PROJECTS[i]
+    W, w, h = 500, 494, 206
+    H = h + 6 + PAD
+    x = (i % 2) * 6
+    delay = i * .5
+    sw = 26 + len(status) * 7.4
+    chips, cx = [], x + 22
+    for t in tech:
+        tw = round(20 + len(t) * 6.9)
+        chips.append(f'<rect x="{cx}" y="168" width="{tw}" height="22" rx="11" fill="{SLOT}" stroke="{EDGE}" stroke-width="1.5"/>'
+                     f'<text x="{cx + tw / 2:.1f}" y="183" font-family="{MONO}" font-size="11" font-weight="700" fill="{TEXT_SOFT}" text-anchor="middle">{esc(t)}</text>')
+        cx += tw + 8
+    lines = ''.join(f'<text x="{x + 22}" y="{132 + j * 20}" font-family="{SANS}" font-size="13.5" fill="{TEXT_SOFT}">{esc(t)}</text>'
+                    for j, t in enumerate(desc))
+    style = f'''
+.bob {{ animation: bob 4.5s ease-in-out infinite; animation-delay: {-delay}s; }}
+@keyframes bob {{ 50% {{ transform: translateY(-4px); }} }}
+.shine {{ animation: shine 7s ease-in-out infinite; animation-delay: {delay}s; }}
+@keyframes shine {{ 0%, 4% {{ transform: skewX(-20deg) translateX(-80px); }} 24%, 100% {{ transform: skewX(-20deg) translateX(620px); }} }}
+.go {{ animation: go 2.4s ease-in-out infinite; animation-delay: {-delay}s; }}
+@keyframes go {{ 50% {{ transform: translate(2px, -2px); }} }}
+'''
+    body = f'''<defs>{shadow_filter('soft', 6, 6, 0.35)}
+<clipPath id="card"><rect x="{x}" y="0" width="{w}" height="{h}" rx="22"/></clipPath>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<g filter="url(#soft)">{raised(x, 0, w, h, 22)}</g>
+<g clip-path="url(#card)"><rect class="shine" x="0" y="0" width="80" height="{H}" fill="url(#g)" transform="skewX(-20)"/></g>
+<g transform="translate({x + 22} 22)"><g class="bob">{app_icon(key, 68)}</g></g>
+<rect x="{x + 108}" y="22" width="{sw:.0f}" height="22" rx="11" fill="{col[2]}" fill-opacity=".22" stroke="{col[1]}" stroke-opacity=".6" stroke-width="1.5"/>
+<text x="{x + 108 + sw / 2:.0f}" y="37" font-family="{MONO}" font-size="11" font-weight="800" letter-spacing=".5" fill="{col[0]}" text-anchor="middle">{esc(status)}</text>
+<text x="{x + 108}" y="74" font-family="{SANS}" font-size="24" font-weight="800" fill="{TEXT}">{esc(name)}</text>
+<text x="{x + 108}" y="95" font-family="{MONO}" font-size="11.5" fill="{TEXT_DIM}">{esc(kind)}</text>
+<g transform="translate({x + w - 32} 33)"><circle r="14" fill="{CARD_TOP}"/>
+<g class="go"><path d="M-4 4 L4 -4 M-2.5 -4 H4 V2.5" fill="none" stroke="{col[1]}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+{lines}
+{''.join(chips)}'''
+    label = f'{name} ({status}): {kind}. {" ".join(desc)} Built with {", ".join(tech)}.'
+    return svg(W, H, label, body, style)
+
+
 # ─────────────────────────────── stack: inventory ───────────────────────────────
 
 GROUPS = [
@@ -460,6 +558,8 @@ def main():
         'divider.svg': divider(),
         'footer.svg': footer(),
         **{f'btn-{kind}.svg': button(kind, i) for i, kind in enumerate(LINKS)},
+        'projects.svg': projects_title(),
+        **{f'project-{p[0]}.svg': project_card(i) for i, p in enumerate(PROJECTS)},
     }
     os.makedirs(OUT, exist_ok=True)
     for name, text in files.items():

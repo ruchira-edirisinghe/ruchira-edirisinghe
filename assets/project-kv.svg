@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="226" viewBox="0 0 500 226" role="img" aria-label="LLM Key Vault (Contributor): MCP Server · DFanso. A local secrets broker for AI agents: they use your API keys and database logins without ever seeing them. Built with Rust, MCP, Postgres, Redis.">
+<title>LLM Key Vault (Contributor): MCP Server · DFanso. A local secrets broker for AI agents: they use your API keys and database logins without ever seeing them. Built with Rust, MCP, Postgres, Redis.</title>
+<style>
+.bob { animation: bob 4.5s ease-in-out infinite; animation-delay: -1.5s; }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+.shine { animation: shine 7s ease-in-out infinite; animation-delay: 1.5s; }
+@keyframes shine { 0%, 4% { transform: skewX(-20deg) translateX(-80px); } 24%, 100% { transform: skewX(-20deg) translateX(620px); } }
+.go { animation: go 2.4s ease-in-out infinite; animation-delay: -1.5s; }
+@keyframes go { 50% { transform: translate(2px, -2px); } }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }</style>
+<defs><filter id="soft" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#05040a" flood-opacity="0.35"/></filter>
+<clipPath id="card"><rect x="6" y="0" width="494" height="206" rx="22"/></clipPath>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<g filter="url(#soft)"><rect x="6" y="6" width="494" height="206" rx="22" fill="#0c0a12"/><rect x="6" y="0" width="494" height="206" rx="22" fill="#24203a"/><rect x="6.75" y="0.75" width="492.5" height="204.5" rx="21.25" fill="none" stroke="#2b2645" stroke-width="1.5"/></g>
+<g clip-path="url(#card)"><rect class="shine" x="0" y="0" width="80" height="226" fill="url(#g)" transform="skewX(-20)"/></g>
+<g transform="translate(28 22)"><g class="bob"><rect y="5" width="68" height="68" rx="17.7" fill="#0c0a12"/><clipPath id="ic-kv"><rect width="68" height="68" rx="17.7"/></clipPath><g clip-path="url(#ic-kv)"><svg width="68" height="68" viewBox="2 2 60 60">
+  
+  <defs>
+    <linearGradient id="kvtile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b6cff"/>
+      <stop offset="1" stop-color="#5b3fd9"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#kvtile)"/>
+  <g fill="#fff">
+    <path fill-rule="evenodd" d="M23 21a11 11 0 1 1 0 22a11 11 0 1 1 0-22zm0 6a5 5 0 1 0 0 10a5 5 0 1 0 0-10z"/>
+    <rect x="32" y="29" width="21" height="6" rx="3"/>
+    <rect x="42" y="31" width="5" height="11" rx="1.5"/>
+    <rect x="49" y="31" width="4" height="8" rx="1.5"/>
+  </g>
+</svg></g><rect width="68" height="34" rx="17.7" fill="#fff" opacity=".07"/><rect x=".75" y=".75" width="66.5" height="66.5" rx="16.95" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="1.5"/></g></g>
+<rect x="114" y="22" width="107" height="22" rx="11" fill="#ab9bdd" fill-opacity=".22" stroke="#c6b9ee" stroke-opacity=".6" stroke-width="1.5"/>
+<text x="168" y="37" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="800" letter-spacing=".5" fill="#e0d7f7" text-anchor="middle">Contributor</text>
+<text x="114" y="74" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="24" font-weight="800" fill="#f6efe7">LLM Key Vault</text>
+<text x="114" y="95" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#6e6785">MCP Server · DFanso</text>
+<g transform="translate(468 33)"><circle r="14" fill="#2b2645"/>
+<g class="go"><path d="M-4 4 L4 -4 M-2.5 -4 H4 V2.5" fill="none" stroke="#c6b9ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="28" y="132" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="13.5" fill="#aaa2bd">A local secrets broker for AI agents: they use your API</text><text x="28" y="152" font-family="'SF Pro Rounded', ui-rounded, 'Nunito', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="13.5" fill="#aaa2bd">keys and database logins without ever seeing them.</text>
+<rect x="28" y="168" width="48" height="22" rx="11" fill="#16131f" stroke="#2d2842" stroke-width="1.5"/><text x="52.0" y="183" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="700" fill="#aaa2bd" text-anchor="middle">Rust</text><rect x="84" y="168" width="41" height="22" rx="11" fill="#16131f" stroke="#2d2842" stroke-width="1.5"/><text x="104.5" y="183" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="700" fill="#aaa2bd" text-anchor="middle">MCP</text><rect x="133" y="168" width="75" height="22" rx="11" fill="#16131f" stroke="#2d2842" stroke-width="1.5"/><text x="170.5" y="183" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="700" fill="#aaa2bd" text-anchor="middle">Postgres</text><rect x="216" y="168" width="54" height="22" rx="11" fill="#16131f" stroke="#2d2842" stroke-width="1.5"/><text x="243.0" y="183" font-family="ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="700" fill="#aaa2bd" text-anchor="middle">Redis</text>
+</svg>

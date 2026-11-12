@@ -11,3 +11,7 @@ Drawn into the README artwork by `theme.py` (the toolbox, the link buttons, and 
 - `clickup.svg`: the Iconify `logos` set's `clickup-icon` (CC0).
 - `tripo.svg`: [theSVG](https://github.com/glincker/thesvg) (MIT), the `thesvg-color` version from Iconify.
 - `ui/`: [Lucide](https://lucide.dev/) glyphs (ISC), from `https://api.iconify.design/lucide/<name>.svg`.
+
+## Project icons (`projects/`)
+
+The featured projects' own icons, copied from their repos: `catalogie.svg` (tracking-application, `client/brand/catalogie-mark.svg`), `rupeeradar.png` (p2p-lkr-widget-app, `play/icon-512.png`, resized to 144 px), `telegram-mcp.svg` (telegram-mcp, `docs/icon.svg`) and `kv.svg` (key-vault-for-llm, `docs/images/logo.svg`).

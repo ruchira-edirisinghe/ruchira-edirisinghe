@@ -15,7 +15,7 @@ from fontTools.ttLib import TTFont
 
 TITLES = [
     'Ruchira', 'Edirisinghe',
-    'A Little About Me', 'My Toolbox', 'My Streak', 'Top Languages', 'Thanks For Playing!',
+    'A Little About Me', 'Featured Projects', 'My Toolbox', 'My Streak', 'Top Languages', 'Thanks For Playing!',
 ]
 TRACKING = 0.04  # extra space between letters, in em, like the site's letter-spacing
 

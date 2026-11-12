@@ -21,6 +21,14 @@
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
+<p><img src="assets/projects.svg" width="88%" alt="Featured projects" /></p>
+
+<p><a href="https://catalogie.com/"><img src="assets/project-catalogie.svg" width="44%" alt="Catalogie, working on it: a web app that tracks what you watch and play, movies, series, games and books in one timeline. React, Node.js, TypeScript, PostgreSQL." /></a><a href="https://github.com/ruchira-edirisinghe/p2p-lkr-widget-app"><img src="assets/project-rupeeradar.svg" width="44%" alt="RupeeRadar, built by me: an Android app and widget for the real Binance P2P USDT/LKR rate, with trend charts, rate alerts and a currency converter. Kotlin, Jetpack Compose, Glance." /></a></p>
+
+<p><a href="https://github.com/iddhi-sulakshana/telegram-mcp"><img src="assets/project-telegram-mcp.svg" width="44%" alt="Telegram MCP, contributor: lets Claude use your Telegram through one always-on daemon, and sends only what you allow. TypeScript, Bun, MCP." /></a><a href="https://github.com/DFanso/key-vault-for-llm"><img src="assets/project-kv.svg" width="44%" alt="LLM Key Vault, contributor: a local secrets broker for AI agents, so they use your API keys and database logins without ever seeing them. Rust, MCP, Postgres, Redis." /></a></p>
+
+<p><img src="assets/divider.svg" width="100%" alt="" /></p>
+
 <p><img src="https://raw.githubusercontent.com/ruchira-edirisinghe/ruchira-edirisinghe/output/stats-streak-languages.svg" width="88%" alt="My contribution streak and top languages" /></p>
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
