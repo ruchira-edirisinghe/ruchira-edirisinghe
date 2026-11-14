@@ -422,15 +422,19 @@ def project_card(i):
 
 GROUPS = [
     ('Design & 3D', PEACH, [('Figma', 'figma'), ('Framer', 'framer'), ('Spline', 'spline'), ('Photoshop', 'photoshop'),
-                            ('Illustrator', 'illustrator'), ('Blender', 'blender'), ('Behance', 'behance')]),
+                            ('Illustrator', 'illustrator'), ('Behance', 'behance'), ('Blender', 'blender'),
+                            ('Midjourney', 'midjourney'), ('Tripo AI', 'tripo')]),
     ('Web & Code', SKY, [('HTML', 'html'), ('CSS', 'css'), ('JavaScript', 'javascript'), ('TypeScript', 'typescript'),
-                         ('React', 'react'), ('Tailwind', 'tailwind'), ('Python', 'python')]),
-    ('AI Tools', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Gemini', 'gemini'), ('Copilot', 'copilot'),
-                         ('Cursor', 'cursor'), ('Midjourney', 'midjourney'), ('Tripo AI', 'tripo')]),
-    ('Games & Workflow', SAGE, [('Unity', 'unity'), ('C#', 'csharp'), ('Git', 'git'), ('GitHub', 'github'),
-                                ('Vercel', 'vercel'), ('ClickUp', 'clickup'), ('Warp', 'warp')]),
+                         ('React', 'react'), ('Next.js', 'nextjs'), ('Tailwind', 'tailwind'), ('Node.js', 'nodejs'),
+                         ('Python', 'python')]),
+    ('AI & Workflow', LILAC, [('Claude', 'claude'), ('ChatGPT', 'chatgpt'), ('Gemini', 'gemini'), ('Copilot', 'copilot'),
+                              ('Cursor', 'cursor'), ('Warp', 'warp'), ('Git', 'git'), ('GitHub', 'github'),
+                              ('ClickUp', 'clickup')]),
+    ('Games, Apps & Infra', SAGE, [('Unity', 'unity'), ('C#', 'csharp'), ('Rust', 'rust'), ('Kotlin', 'kotlin'),
+                                   ('PostgreSQL', 'postgresql'), ('Docker', 'docker'), ('Vercel', 'vercel'),
+                                   ('Cloudflare', 'cloudflare'), ('Dokploy', 'dokploy')]),
 ]
-PER_ROW = 7
+PER_ROW = 9
 
 
 def stack():

@@ -33,7 +33,7 @@
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
-<p><img src="assets/stack.svg" width="88%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Blender, Behance. Web and code: HTML, CSS, JavaScript, TypeScript, React, Tailwind, Python. AI tools: Claude, ChatGPT, Gemini, Copilot, Cursor, Midjourney, Tripo AI. Games and workflow: Unity, C#, Git, GitHub, Vercel, ClickUp, Warp." /></p>
+<p><img src="assets/stack.svg" width="88%" alt="My toolbox. Design and 3D: Figma, Framer, Spline, Photoshop, Illustrator, Behance, Blender, Midjourney, Tripo AI. Web and code: HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind, Node.js, Python. AI and workflow: Claude, ChatGPT, Gemini, Copilot, Cursor, Warp, Git, GitHub, ClickUp. Games, apps and infra: Unity, C#, Rust, Kotlin, PostgreSQL, Docker, Vercel, Cloudflare, Dokploy." /></p>
 
 <p><img src="assets/divider.svg" width="100%" alt="" /></p>
 
