@@ -5,7 +5,9 @@ name: Generate profile assets
 # together to the `output` branch (one job, so neither overwrites the other).
 on:
   schedule:
-    - cron: "17 */3 * * *" # every 3 hours
+    # Hourly, off the top of the hour: GitHub delays scheduled runs at busy times
+    # and drops some outright, so a 3-hour schedule left the stats 4-9 hours old.
+    - cron: "41 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
